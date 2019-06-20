@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Projeto2aEpoca
 {
-    class Player
+    class Player : Character
     {
     }
 }

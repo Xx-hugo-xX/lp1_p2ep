@@ -6,5 +6,13 @@ namespace Projeto2aEpoca
 {
     class Board
     {
+        //Instance Variables
+        public int rows, columns;
+        //Constructor Method
+        public Board(int rows, int columns)
+        {
+            this.rows = rows;
+            this.columns = columns;
+        }
     }
 }
