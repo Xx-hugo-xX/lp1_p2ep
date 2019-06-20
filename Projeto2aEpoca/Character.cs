@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Projeto2aEpoca
 {
-    class Character
+    public class Character
     {
+        //instanse variable
+        float hp = 100;
     }
 }
