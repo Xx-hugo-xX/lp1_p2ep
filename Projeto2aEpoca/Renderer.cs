@@ -6,12 +6,117 @@ namespace Projeto2aEpoca
 {
     class Renderer
     {
-        void DrawMap(Board board)
+        public void ShowGameValues(Board board)
         {
-            for (int i = 0; i < board.rows; i++)
-            {
+            string levelDisplay = board.level.ToString().PadLeft(3, '0');
+            string difficultyDisplay = board.Difficulty.ToString().
+                                                               PadLeft(2, '0');
+            string rowsDisplay = board.Rows.ToString().PadLeft(2, '0');
+            string columnsDisplay = board.Columns.ToString().PadLeft(2, '0');
 
+            Console.WriteLine($"+++++++++++ LP1 Rogue : Level {levelDisplay}" +
+                $" : Difficulty {difficultyDisplay} : Size {rowsDisplay}  nx" +
+                $" {columnsDisplay} ++++++++++++++++\n\n");
+        }
+
+        public void DrawMap(Board board)
+        {
+            int rows = board.Rows;
+            int columns = board.Columns;
+            int lines = 5;
+            int space;
+
+            List<int> endSpaces = new List<int>();
+
+            for (int i = 0; i < rows; i++)
+            {
+                int spaceAdded = columns * (i + 1);
+                endSpaces.Add(spaceAdded);
             }
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < lines; j++)
+                {
+                    for (int k = 0; k < columns; k++)
+                    {
+                        space = i * columns + k + 1;
+                        string spaceD = space.ToString().PadLeft(3, '0');
+
+                        switch (j)
+                        {
+                            //This row defines the top limit of the map grid. 
+                            case 0:
+                                Console.Write("+-------------");
+
+                                foreach (int endSpace in endSpaces)
+                                {
+                                    if (space == endSpace)
+                                    {
+                                        Console.Write("+");
+                                    }
+                                }
+
+                                break;
+
+                            case 1:
+                                Console.Write($"|             ");
+
+                                foreach (int endSpace in endSpaces)
+                                {
+                                    if (space == endSpace)
+                                    {
+                                        Console.Write("|");
+                                    }
+                                }
+                                break;
+
+                            case 2:
+                                Console.Write("|    ~~~    ");
+
+                                foreach (int endSpace in endSpaces)
+                                {
+                                    if (space == endSpace)
+                                    {
+                                        Console.Write("|");
+                                    }
+                                }
+                                break;
+
+                            case 3:
+                                Console.Write("|    ~~~    ");
+
+                                foreach (int endSpace in endSpaces)
+                                {
+                                    if (space == endSpace)
+                                    {
+                                        Console.Write("|");
+                                    }
+                                }
+                                break;
+
+                            case 4:
+                                Console.Write("|             ");
+
+                                foreach (int endSpace in endSpaces)
+                                {
+                                    if (space == endSpace)
+                                    {
+                                        Console.Write("|");
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                    Console.Write("\n");
+                }
+            }
+            Console.Write("+");
+            for (int i = 0; i < columns; i++)
+            {
+                Console.Write("-------------+");
+            }
+            Console.Write("\n\n");
         }
 
 
@@ -35,9 +140,9 @@ namespace Projeto2aEpoca
 
         public void Credits()
         {
-            Console.WriteLine("This program was made by " +
-                              "Hugo Feliciano (a21805809)," +
-                              "Pedro Fernandes (a21803791) and" +
+            Console.WriteLine("This program was made by:\n " +
+                              "Hugo Feliciano (a21805809)\n" +
+                              "Pedro Fernandes (a21803791)\n" +
                               "Rita Saraiva (a21807278).");
         }
     }
