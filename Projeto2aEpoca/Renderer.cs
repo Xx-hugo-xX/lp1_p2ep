@@ -45,7 +45,6 @@ namespace Projeto2aEpoca
 
                         switch (j)
                         {
-                            //This row defines the top limit of the map grid. 
                             case 0:
                                 Console.Write("+-------------");
 
@@ -72,7 +71,7 @@ namespace Projeto2aEpoca
                                 break;
 
                             case 2:
-                                Console.Write("|    ~~~    ");
+                                Console.Write("|   ~~~~~   ");
 
                                 foreach (int endSpace in endSpaces)
                                 {
@@ -84,7 +83,7 @@ namespace Projeto2aEpoca
                                 break;
 
                             case 3:
-                                Console.Write("|    ~~~    ");
+                                Console.Write("|   ~~~~~   ");
 
                                 foreach (int endSpace in endSpaces)
                                 {
@@ -122,7 +121,7 @@ namespace Projeto2aEpoca
 
         void PrintCell()
         {
-            //DoSomething
+            // Shows whats on each *visible* cell (fase 2)
         }
 
         public void MainMenu()
@@ -135,7 +134,7 @@ namespace Projeto2aEpoca
 
         public void HighScores()
         {
-            //DoSomething
+            // Displays the highest scores (fase 5)
         }
 
         public void Credits()
