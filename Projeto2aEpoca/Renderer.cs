@@ -14,8 +14,8 @@ namespace Projeto2aEpoca
             string rowsDisplay = board.Rows.ToString().PadLeft(2, '0');
             string columnsDisplay = board.Columns.ToString().PadLeft(2, '0');
 
-            Console.WriteLine($"+++++++++++ LP1 Rogue : Level {levelDisplay}" +
-                $" : Difficulty {difficultyDisplay} : Size {rowsDisplay}  nx" +
+            Console.WriteLine($"++++++++++++++++ LP1 Rogue : Level {levelDisplay}" +
+                $" : Difficulty {difficultyDisplay} : Size {rowsDisplay} x" +
                 $" {columnsDisplay} ++++++++++++++++\n\n");
         }
 
@@ -71,7 +71,7 @@ namespace Projeto2aEpoca
                                 break;
 
                             case 2:
-                                Console.Write("|   ~~~~~   ");
+                                Console.Write("|    ~~~~~    ");
 
                                 foreach (int endSpace in endSpaces)
                                 {
@@ -83,7 +83,7 @@ namespace Projeto2aEpoca
                                 break;
 
                             case 3:
-                                Console.Write("|   ~~~~~   ");
+                                Console.Write("|    ~~~~~    ");
 
                                 foreach (int endSpace in endSpaces)
                                 {

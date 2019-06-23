@@ -30,9 +30,11 @@ namespace Projeto2aEpoca
                         break;
                 }
             }
-            Console.WriteLine("Rows: " + rows + "\nColumns: " + columns + "\nDifficulty: " + difficulty);
-
             Board board = new Board(rows, columns);
+            Renderer renderer = new Renderer();
+            GameLoop gameLoop = new GameLoop();
+
+            gameLoop.PlayGame(board, renderer);
         }
     }
 }

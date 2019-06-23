@@ -7,12 +7,14 @@ namespace Projeto2aEpoca
     public class Board
     {
         //Instance Variables
-        public int rows, columns;
+        public int Rows, Columns, Difficulty;
+        public int level;
         //Constructor Method
-        public Board(int rows, int columns)
+        public Board(int rows, int columns, int difficulty)
         {
-            this.rows = rows;
-            this.columns = columns;
+            Rows = rows;
+            Columns = columns;
+            Difficulty = difficulty;
         }
     }
 }
