@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Projeto2aEpoca
 {
-    class Renderer
+    public class Renderer
     {
         public void ShowGameValues(Board board)
         {
@@ -19,7 +19,7 @@ namespace Projeto2aEpoca
                 $" {columnsDisplay} ++++++++++++++++\n\n");
         }
 
-        public void DrawMap(Board board)
+        public void DrawMap(Board board, Player player)
         {
             int rows = board.Rows;
             int columns = board.Columns;
@@ -71,8 +71,20 @@ namespace Projeto2aEpoca
                                 break;
 
                             case 2:
-                                Console.Write("|    ~~~~~    ");
+                                Console.Write("|    ");
+                                
+                                for (int l = 0; l < 5; l++)
+                                {
+                                    if (player.playerPosition.Row == i && player.playerPosition.Column == k)
+                                    {
+                                        board.cellList[space - 1].ocupantList[0] = Cell.ocupantType.player;
+                                    }
+                                    else board.cellList[space - 1].ocupantList[0] = Cell.ocupantType.empty;
 
+                                    Console.Write((char)board.cellList[space -1].ocupantList[l]);
+                                }
+                                Console.Write("    ");
+                                
                                 foreach (int endSpace in endSpaces)
                                 {
                                     if (space == endSpace)
@@ -83,7 +95,7 @@ namespace Projeto2aEpoca
                                 break;
 
                             case 3:
-                                Console.Write("|    ~~~~~    ");
+                                Console.Write("|    .....    ");
 
                                 foreach (int endSpace in endSpaces)
                                 {

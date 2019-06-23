@@ -7,8 +7,8 @@ namespace Projeto2aEpoca
     public class Player : Character
     {
         //instanse variable
-        float hp;
-        Position playerPosition;
+        public float hp;
+        public Position playerPosition;
 
         public Player(int row, int column)
         {

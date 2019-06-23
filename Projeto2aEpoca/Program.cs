@@ -25,16 +25,18 @@ namespace Projeto2aEpoca
                         break;
                     case "-d":
                         difficulty = Convert.ToInt32(args[i + 1]);
+                        if (difficulty > 10) difficulty = 10;
                         break;
                     default:
                         break;
                 }
             }
-            Board board = new Board(rows, columns);
+            Board board = new Board(rows, columns, difficulty);
+  
             Renderer renderer = new Renderer();
-            GameLoop gameLoop = new GameLoop();
+            GameLoop gameLoop = new GameLoop(board, renderer);
 
-            gameLoop.PlayGame(board, renderer);
+            gameLoop.PlayGame();
         }
     }
 }
