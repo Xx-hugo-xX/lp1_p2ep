@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace Projeto2aEpoca
 {
@@ -6,6 +7,8 @@ namespace Projeto2aEpoca
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.UTF8;
+
             //Instance Variables
             int rows = 0;
             int columns = 0;
@@ -31,10 +34,13 @@ namespace Projeto2aEpoca
                         break;
                 }
             }
-            Board board = new Board(rows, columns, difficulty);
-  
+
+
             Renderer renderer = new Renderer();
-            GameLoop gameLoop = new GameLoop(board, renderer);
+            Board board = new Board(rows, columns, difficulty);
+            Player player = new Player(0, 0);
+            Level level = new Level(board, player);
+            GameLoop gameLoop = new GameLoop(board, renderer, level, player);
 
             gameLoop.PlayGame();
         }

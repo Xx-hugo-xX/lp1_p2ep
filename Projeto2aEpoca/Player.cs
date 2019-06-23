@@ -8,6 +8,7 @@ namespace Projeto2aEpoca
     {
         //instanse variable
         public float hp;
+        public bool hasMoved;
         public Position playerPosition;
 
         public Player(int row, int column)
@@ -17,9 +18,11 @@ namespace Projeto2aEpoca
             hp = 100.0f;
         }
 
-        public void Move(int direction, int gridRows, int gridCols)
+        public void Move(int direction, Board board)
         {
             Position wantedPosition = new Position(0,0);
+
+            hasMoved = false;
 
             switch (direction)
             {
@@ -41,6 +44,11 @@ namespace Projeto2aEpoca
                 case 4:
                     wantedPosition.Row = playerPosition.Row;
                     wantedPosition.Column = playerPosition.Column - 1;
+                    break;
+
+                case 5:
+                    wantedPosition.Row = playerPosition.Row;
+                    wantedPosition.Column = playerPosition.Column;
                     break;
 
                 case 6:
@@ -68,13 +76,23 @@ namespace Projeto2aEpoca
                     break;
             }
 
-            if ((wantedPosition.Row > 0 || wantedPosition.Row < gridRows) &&
-               (wantedPosition.Column > 0 || wantedPosition.Column < gridCols))
+            if (CheckInsideBounds(wantedPosition, board))
             {
                 playerPosition.Row = wantedPosition.Row;
                 playerPosition.Column = wantedPosition.Column;
+                hasMoved = true;
             }
             else Console.WriteLine("\nYou can't move there!\n");
+        }
+
+        private bool CheckInsideBounds(Position wantedPosition, Board board)
+        {
+            if (wantedPosition.Row < 0) return false;
+            else if (wantedPosition.Row >= board.Rows) return false;
+            else if (wantedPosition.Column < 0) return false;
+            else if (wantedPosition.Column >= board.Columns) return false;
+            else return true;
+
         }
     }
 }

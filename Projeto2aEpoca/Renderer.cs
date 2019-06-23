@@ -6,9 +6,9 @@ namespace Projeto2aEpoca
 {
     public class Renderer
     {
-        public void ShowGameValues(Board board)
+        public void ShowGameValues(Board board, Level level)
         {
-            string levelDisplay = board.level.ToString().PadLeft(3, '0');
+            string levelDisplay = level.currentLevel.ToString().PadLeft(3, '0');
             string difficultyDisplay = board.Difficulty.ToString().
                                                                PadLeft(2, '0');
             string rowsDisplay = board.Rows.ToString().PadLeft(2, '0');
@@ -19,7 +19,12 @@ namespace Projeto2aEpoca
                 $" {columnsDisplay} ++++++++++++++++\n\n");
         }
 
-        public void DrawMap(Board board, Player player)
+        public void ShowPlayerHealth(Player player)
+        {
+            Console.WriteLine($"\nHP: {player.hp}\n");
+        }
+
+        public void DrawMap(Board board, Level level)
         {
             int rows = board.Rows;
             int columns = board.Columns;
@@ -71,32 +76,46 @@ namespace Projeto2aEpoca
                                 break;
 
                             case 2:
-                                Console.Write("|    ");
-                                
-                                for (int l = 0; l < 5; l++)
+                                if (level.exit.Row == board.cellList[space - 1].cellRow && level.exit.Column == board.cellList[space - 1].cellColumn)
                                 {
-                                    if (player.playerPosition.Row == i && player.playerPosition.Column == k)
-                                    {
-                                        board.cellList[space - 1].ocupantList[0] = Cell.ocupantType.player;
-                                    }
-                                    else board.cellList[space - 1].ocupantList[0] = Cell.ocupantType.empty;
+                                    Console.Write("|    EXIT!    ");
+                                }
+                                else
+                                {
+                                    Console.Write("|    ");
 
-                                    Console.Write((char)board.cellList[space -1].ocupantList[l]);
-                                }
-                                Console.Write("    ");
-                                
-                                foreach (int endSpace in endSpaces)
-                                {
-                                    if (space == endSpace)
+                                    for (int l = 0; l < 5; l++)
                                     {
-                                        Console.Write("|");
+                                        Console.Write((char)board.cellList[space - 1].ocupantList[l]);
                                     }
+                                    Console.Write("    ");
                                 }
+
+                                foreach (int endSpace in endSpaces)
+                                    {
+                                        if (space == endSpace)
+                                        {
+                                            Console.Write("|");
+                                        }
+                                    }
+
                                 break;
 
                             case 3:
-                                Console.Write("|    .....    ");
+                                if (level.exit.Row == board.cellList[space-1].cellRow && level.exit.Column == board.cellList[space - 1].cellColumn)
+                                {
+                                    Console.Write("|    EXIT!    ");
+                                }
+                                else
+                                {
+                                    Console.Write("|    ");
 
+                                    for (int l = 5; l < 10; l++)
+                                    {
+                                        Console.Write((char)board.cellList[space - 1].ocupantList[l]);
+                                    }
+                                    Console.Write("    ");
+                                }
                                 foreach (int endSpace in endSpaces)
                                 {
                                     if (space == endSpace)

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Projeto2aEpoca
 {
-    class Weapon : Item
+    public class Weapon : Item
     {
     }
 }
