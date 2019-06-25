@@ -14,7 +14,7 @@ namespace Projeto2aEpoca
                                   player     = '\u0398',
                                   enemy      = '\u03A8',
                                   food       = '\u03A9',
-                                  weapon     = '\u0713',
+                                  weapon     = '\u03EF',
                                   trap       = '\u0416',
                                   map        = '\u0524',
                                   unexplored = '~',

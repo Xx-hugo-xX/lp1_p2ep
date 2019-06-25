@@ -11,7 +11,7 @@ namespace Projeto2aEpoca
         Level Level;
         Player Player;
 
-        bool playing = true;
+        bool playing = false;
 
         public GameLoop(Board board, Renderer renderer, Level level, Player player)
         {
@@ -24,11 +24,39 @@ namespace Projeto2aEpoca
 
         public void PlayGame()
         {
+            while(!playing)
+            {
+                Console.Clear();
+                Renderer.MainMenu();
+                char option = Convert.ToChar(Console.ReadLine());
+
+                Console.Clear();
+                if (option == '1')
+                {
+                    playing = true;
+                }
+                else if (option == '2')
+                {
+                    Renderer.HighScores();
+                    Console.ReadLine();
+                }
+
+                else if (option == '3')
+                {
+                    Renderer.Credits();
+                    Console.ReadLine();
+                }
+                else if (option == '4')
+                {
+                    Environment.Exit(0);
+                }
+            }
+
             while (playing)
             {
                 Level.StartNewLevel();
                 bool finishedLevel = false;
-                bool madeTurn;
+                bool madeTurn = false;
                 while (!finishedLevel)
                 {
                     foreach (Cell cell in Board.cellList)
@@ -37,13 +65,28 @@ namespace Projeto2aEpoca
                     }
 
                     Renderer.ShowGameValues(Board, Level);
-                    Renderer.ShowPlayerHealth(Player);
+                    Renderer.ShowPlayerStats(Player);
                     Renderer.DrawMap(Board, Level);
-                    Console.WriteLine("Press 1, 2, 3, 4, 6, 7, 8 or 9 to move, according to the keypad. Then press enter to register movement");
-                    int moveOption = Convert.ToInt32(Console.ReadLine());
 
-                    Player.Move(moveOption, Board);
-                    madeTurn = Player.hasMoved;
+                    Renderer.ShowLegend();
+
+                    string moveOption = Console.ReadLine();
+
+                    if (moveOption == "1" || moveOption == "2" ||
+                        moveOption == "3" || moveOption == "4" ||
+                        moveOption == "5" || moveOption == "6" ||
+                        moveOption == "7" || moveOption == "8" ||
+                        moveOption == "9")
+                    {
+                        Player.Move(moveOption, Board);
+                        madeTurn = Player.hasMoved;
+                    }
+
+                    else if (moveOption == "L")
+                    {
+                        Player.LookAround(Board);
+                    }
+                    else Console.WriteLine("ERROOOOOOOOOOOOOOOOOOOO");
 
                     if (Player.playerPosition.Row == Level.exit.Row && Player.playerPosition.Column == Level.exit.Column)
                     {
@@ -52,6 +95,8 @@ namespace Projeto2aEpoca
                     }
 
                     if (madeTurn) Player.hp -= 1.0f;
+
+                    Console.Clear();
                 }
             }
         }

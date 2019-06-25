@@ -19,9 +19,36 @@ namespace Projeto2aEpoca
                 $" {columnsDisplay} ++++++++++++++++\n\n");
         }
 
-        public void ShowPlayerHealth(Player player)
+        public void ShowPlayerStats(Player player)
         {
+            Console.WriteLine("Player Stats");
+            Console.WriteLine("------------");
             Console.WriteLine($"\nHP: {player.hp}\n");
+        }
+
+        public void ShowOptions()
+        {
+            Console.WriteLine("Options");
+            Console.WriteLine("-------");
+            Console.WriteLine("↖ ↑ ↗        7 8 9          (F)Attack Enemy(E) Pick up item" +
+                "(U) Use item(D) Drop item");
+            Console.WriteLine("←   →   ->   4   6  Move    (L) Look around(H) Help");
+            Console.WriteLine("↙ ↓ ↘        1 2 3          (S)Save game(Q) Quit game");
+
+        }
+
+        public void ShowLegend()
+        {
+            Console.WriteLine("Options                                 Legend");
+            Console.WriteLine("------                                  ------");
+            Console.WriteLine("↖ ↑ ↗        7 8 9                      \u0398 - Player");
+            Console.WriteLine("←   →   ->   4   6   Move               \u03A8 - Enemy");
+            Console.WriteLine("↙ ↓ ↘        1 2 3                      \u03EF - Weapon");
+            Console.WriteLine("                                        \u03A9 - Food");
+            Console.WriteLine("(F) Attack Enemy   (E) Pick Up Item     \u0416 - Trap");
+            Console.WriteLine("(U) Use Item       (D) Drop Item        \u0524 - Map");
+            Console.WriteLine("(L) Look Around    (H) Help             . - Empty");
+            Console.WriteLine("(S) Save Game      (Q) Quit Game        ~ - Unexplored");
         }
 
         public void DrawMap(Board board, Level level)
@@ -166,6 +193,8 @@ namespace Projeto2aEpoca
         public void HighScores()
         {
             // Displays the highest scores (fase 5)
+            Console.WriteLine("Press any key to return");
+
         }
 
         public void Credits()
@@ -174,6 +203,8 @@ namespace Projeto2aEpoca
                               "Hugo Feliciano (a21805809)\n" +
                               "Pedro Fernandes (a21803791)\n" +
                               "Rita Saraiva (a21807278).");
+
+            Console.WriteLine("Press any key to return");
         }
     }
 }
