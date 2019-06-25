@@ -165,5 +165,12 @@ namespace Projeto2aEpoca
                 }
             }
         }
+
+        public void PlayerDeath()
+        {
+            Console.Clear();
+            Console.WriteLine("YOU DIED. Watch out for your HP!");
+            Console.ReadLine();
+        }
     }
 }

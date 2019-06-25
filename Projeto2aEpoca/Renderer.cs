@@ -103,7 +103,13 @@ namespace Projeto2aEpoca
                                 break;
 
                             case 2:
-                                if (level.exit.Row == board.cellList[space - 1].cellRow && level.exit.Column == board.cellList[space - 1].cellColumn)
+                                if (!board.cellList[space-1].hasBeenExplored)
+                                {
+                                    Console.Write("|    ~~~~~    ");
+                                }
+                                else if (level.exit.Row == board.cellList[space - 1]
+                                    .cellRow && level.exit.Column ==
+                                    board.cellList[space - 1].cellColumn)
                                 {
                                     Console.Write("|    EXIT!    ");
                                 }
@@ -129,7 +135,13 @@ namespace Projeto2aEpoca
                                 break;
 
                             case 3:
-                                if (level.exit.Row == board.cellList[space-1].cellRow && level.exit.Column == board.cellList[space - 1].cellColumn)
+                                if (!board.cellList[space - 1].hasBeenExplored)
+                                {
+                                    Console.Write("|    ~~~~~    ");
+                                }
+                                else if (level.exit.Row == board.cellList[space - 1]
+                                    .cellRow && level.exit.Column ==
+                                    board.cellList[space - 1].cellColumn)
                                 {
                                     Console.Write("|    EXIT!    ");
                                 }

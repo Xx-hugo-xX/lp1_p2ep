@@ -95,6 +95,11 @@ namespace Projeto2aEpoca
                     }
 
                     if (madeTurn) Player.hp -= 1.0f;
+                    if (Player.hp <= 0.0f)
+                    {
+                        Player.PlayerDeath();
+                        Environment.Exit(0);
+                    }
 
                     Console.Clear();
                 }

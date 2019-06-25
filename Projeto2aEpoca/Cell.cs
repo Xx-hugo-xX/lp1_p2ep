@@ -17,7 +17,6 @@ namespace Projeto2aEpoca
                                   weapon     = '\u03EF',
                                   trap       = '\u0416',
                                   map        = '\u0524',
-                                  unexplored = '~',
                                   exit };
 
         public ocupantType[] ocupantList = new ocupantType[10];
@@ -29,7 +28,7 @@ namespace Projeto2aEpoca
             cellColumn = column;
             for (int i = 0; i < ocupantList.Length; i++)
             {
-                ocupantList[i] = ocupantType.unexplored;
+                ocupantList[i] = ocupantType.empty;
             }
             hasBeenExplored = false;
         }
@@ -60,7 +59,6 @@ namespace Projeto2aEpoca
                 ocupantList[0] = ocupantType.exit;
             }
             else if (hasBeenExplored) ocupantList[0] = ocupantType.empty;
-            else ocupantList[0] = ocupantType.unexplored;
         }
     }
 }

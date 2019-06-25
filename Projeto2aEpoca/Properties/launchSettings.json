@@ -2,7 +2,7 @@
   "profiles": {
     "Projeto2aEpoca": {
       "commandName": "Project",
-      "commandLineArgs": "-r 7 -c 8 -d 9"
+      "commandLineArgs": "-r 7 -c 8 -d 3"
     }
   }
 }
