@@ -8,6 +8,7 @@ namespace Projeto2aEpoca
     {
         public int currentLevel;
         public Position exit;
+        public Position map;
 
         Board Board;
         Player Player;
@@ -36,6 +37,13 @@ namespace Projeto2aEpoca
                 new Position(random.Next(Board.Rows), 0);
 
             exit = new Position(random.Next(Board.Rows), Board.Columns-1);
+
+            map = new Position(exit.Row, exit.Column);
+            while (map.Row == exit.Row && map.Column == exit.Column)
+            {
+                map = new Position(random.Next(Board.Rows),
+                                   random.Next(Board.Columns));
+            }
 
             for (int i = 0; i < Board.Rows; i++)
             {
