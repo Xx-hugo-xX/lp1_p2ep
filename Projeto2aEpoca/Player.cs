@@ -10,6 +10,7 @@ namespace Projeto2aEpoca
         public float hp;
         public bool hasMoved;
         public Position playerPosition;
+        public bool hasMap;
 
         public Player(int row, int column)
         {

@@ -18,5 +18,12 @@ namespace Projeto2aEpoca
             Difficulty = difficulty;
             cellList = new List<Cell>();
         }
+        public void exploreAllCells()
+        {
+            foreach (Cell cell in cellList)
+            {
+                cell.hasBeenExplored = true;
+            }
+        }
     }
 }

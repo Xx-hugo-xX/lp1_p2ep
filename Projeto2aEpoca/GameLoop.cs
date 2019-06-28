@@ -61,7 +61,7 @@ namespace Projeto2aEpoca
                 {
                     foreach (Cell cell in Board.cellList)
                     {
-                        cell.CheckPlayer(Player, Level.exit);
+                        cell.CheckOccupants(Player, Level);
                     }
 
                     Renderer.ShowGameValues(Board, Level);
@@ -86,7 +86,15 @@ namespace Projeto2aEpoca
                     {
                         Player.LookAround(Board);
                     }
-                    else Console.WriteLine("ERROOOOOOOOOOOOOOOOOOOO");
+                    else if (moveOption == "E")
+                    {
+                        if (Player.playerPosition.Row == Level.map.Row &&
+                            Player.playerPosition.Column == Level.map.Column)
+                        {
+                            Player.hasMap = true;
+                            Board.exploreAllCells();
+                        }
+                    }
 
                     if (Player.playerPosition.Row == Level.exit.Row && Player.playerPosition.Column == Level.exit.Column)
                     {
