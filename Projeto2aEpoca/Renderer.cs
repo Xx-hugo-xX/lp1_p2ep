@@ -119,7 +119,7 @@ namespace Projeto2aEpoca
 
                                     for (int l = 0; l < 5; l++)
                                     {
-                                        Console.Write((char)board.cellList[space - 1].ocupantList[l]);
+                                        Console.Write((char)board.cellList[space - 1].occupantList[l]);
                                     }
                                     Console.Write("    ");
                                 }
@@ -151,7 +151,7 @@ namespace Projeto2aEpoca
 
                                     for (int l = 5; l < 10; l++)
                                     {
-                                        Console.Write((char)board.cellList[space - 1].ocupantList[l]);
+                                        Console.Write((char)board.cellList[space - 1].occupantList[l]);
                                     }
                                     Console.Write("    ");
                                 }
