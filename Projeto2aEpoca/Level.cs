@@ -40,10 +40,9 @@ namespace Projeto2aEpoca
             Player.playerPosition = new Position(random.Next(Board.Rows), 0);
             // Sets Exit's Position (Cell)
             exit = new Position(random.Next(Board.Rows), Board.Columns-1);
+            
             // Sets Map's Position (Cell)
             map = new Position(exit.Row, exit.Column);
-
-            // ?
             while (map.Row == exit.Row && map.Column == exit.Column)
             {
                 map = new Position(random.Next(Board.Rows),
