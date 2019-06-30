@@ -6,11 +6,11 @@ namespace Projeto2aEpoca
 {
     public class Board
     {
-        //Instance Variables
+        // Instance Variables
         public int Rows, Columns, Difficulty;
         public List<Cell> cellList;
 
-        //Constructor Method
+        // Constructor Method
         public Board(int rows, int columns, int difficulty)
         {
             Rows = rows;
@@ -18,6 +18,8 @@ namespace Projeto2aEpoca
             Difficulty = difficulty;
             cellList = new List<Cell>();
         }
+
+        // Changes All Cells To Explored State
         public void exploreAllCells()
         {
             foreach (Cell cell in cellList)

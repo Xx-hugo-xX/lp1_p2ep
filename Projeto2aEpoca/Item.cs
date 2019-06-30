@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Projeto2aEpoca
 {
+    // Not Necessary For "Fase 03"
     public class Item
     {
     }

@@ -6,10 +6,13 @@ namespace Projeto2aEpoca
 {
     public class Cell
     {
+        // Instance Variables
         public int cellRow, cellColumn;
-
         public bool hasBeenExplored { get; set; }
+        public occupantType[] occupantList = new occupantType[10];
 
+
+        // Possible Cell Occupants
         public enum occupantType
         {
             empty = '.',
@@ -22,9 +25,7 @@ namespace Projeto2aEpoca
             exit
         };
 
-        public occupantType[] occupantList = new occupantType[10];
-
-
+        // Constructor Method
         public Cell(int row, int column)
         {
             cellRow = row;
@@ -35,7 +36,8 @@ namespace Projeto2aEpoca
             }
             hasBeenExplored = false;
         }
-
+        
+        // Checks Cell Occupants and Adds Them To The List
         public void CheckOccupants(Player player, Level level)
         {
             if (level.exit.Row == cellRow &&
@@ -44,13 +46,13 @@ namespace Projeto2aEpoca
                 occupantList[0] = occupantType.exit;
             }
 
-
             if (player.playerPosition.Row == cellRow &&
                 player.playerPosition.Column == cellColumn)
             {
                 occupantList[0] = occupantType.player;
                 hasBeenExplored = true;
             }
+
             else occupantList[0] = occupantType.empty;
 
             if (!player.hasMap && level.map.Row == cellRow &&
@@ -58,6 +60,7 @@ namespace Projeto2aEpoca
             {
                 occupantList[9] = occupantType.map;
             }
+
             else occupantList[9] = occupantType.empty;
 
             if (level.exit.Row == cellRow &&

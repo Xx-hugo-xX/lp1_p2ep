@@ -9,7 +9,7 @@ namespace Projeto2aEpoca
         {
             Console.OutputEncoding = Encoding.UTF8;
 
-            //Instance Variables
+            // Instance Variables
             int rows = 0;
             int columns = 0;
             int difficulty = 0;
@@ -17,6 +17,7 @@ namespace Projeto2aEpoca
 
             for (int i = 0; i < args.Length; i++)
             {
+                // Interprets Console Arguments
                 switch (args[i])
                 {
                     case "-r":
