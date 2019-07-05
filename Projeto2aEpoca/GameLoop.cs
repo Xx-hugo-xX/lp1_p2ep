@@ -22,10 +22,10 @@ namespace Projeto2aEpoca
             Level = level;
             Player = player;
         }
-        
+
         public void PlayGame()
         {
-            while(!playing)
+            while (!playing)
             {
                 Console.Clear();
                 Renderer.MainMenu();
@@ -52,25 +52,59 @@ namespace Projeto2aEpoca
                     Environment.Exit(0);
                 }
             }
-            
+
             while (playing)
             {
                 // Restarts Level Variables
                 Level.StartNewLevel();
                 bool finishedLevel = false;
                 bool madeTurn = false;
-                
+
+                string m1 = "";
+                string m2 = "";
+                string m3 = "";
+
                 while (!finishedLevel)
                 {
+                    madeTurn = false;
+
+                    m1 = "";
+                    m2 = "";
+                    m3 = "";
+
+                    foreach (Trap trap in Level.trapList)
+                    {
+                        if (Player.playerPosition.Row == trap.Row &&
+                            Player.playerPosition.Column == trap.Column)
+                        {
+                            if (!trap.fallenInto)
+                            {
+                                m3 = m2;
+                                m2 = m1;
+                                m1 = trap.dealDamage(Player);
+                            }
+                        }
+                    }
+
+                    // Ends Game When Player's Health Is Equal/Below 0
+                    if (Player.hp <= 0.0f)
+                    {
+                        Player.PlayerDeath();
+                        Environment.Exit(0);
+                    }
+
                     foreach (Cell cell in Board.cellList)
                     {
                         cell.CheckOccupants(Player, Level);
                     }
 
+
+
                     // Renderer
                     Renderer.ShowGameValues(Board, Level);
                     Renderer.ShowPlayerStats(Player);
                     Renderer.DrawMap(Board, Level);
+                    Renderer.ShowMessage(m1, m2, m3);
                     Renderer.ShowLegend();
 
                     string moveOption = Console.ReadLine();
@@ -90,6 +124,7 @@ namespace Projeto2aEpoca
                     else if (moveOption == "L")
                     {
                         Player.LookAround(Board);
+                        madeTurn = true;
                     }
 
                     // "Pick_Up Map"
@@ -100,11 +135,17 @@ namespace Projeto2aEpoca
                         {
                             Player.hasMap = true;
                             Board.exploreAllCells();
+                            madeTurn = true;
                         }
                     }
 
+                    else if (moveOption == "Q")
+                    {
+                        Renderer.QuitGame();
+                    }
+
                     // Checks If Player's in Exit Cell
-                    if (Player.playerPosition.Row == Level.exit.Row && 
+                    if (Player.playerPosition.Row == Level.exit.Row &&
                         Player.playerPosition.Column == Level.exit.Column)
                     {
                         Level.NextLevel();

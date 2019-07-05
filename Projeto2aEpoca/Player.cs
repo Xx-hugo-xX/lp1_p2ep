@@ -7,7 +7,7 @@ namespace Projeto2aEpoca
     public class Player : Character
     {
         // Instance Variables
-        public float hp;
+        public double hp;
         public bool hasMoved;
         public Position playerPosition;
         public bool hasMap;
