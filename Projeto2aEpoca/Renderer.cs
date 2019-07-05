@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Projeto2aEpoca
 {
@@ -9,11 +9,11 @@ namespace Projeto2aEpoca
         public void ShowGameValues(Board board, Level level)
         {
             // Shows Current Level
-            string levelDisplay = 
+            string levelDisplay =
                 level.currentLevel.ToString().PadLeft(3, '0');
 
             // Shows Current Difficulty
-            string difficultyDisplay = 
+            string difficultyDisplay =
                 board.Difficulty.ToString().PadLeft(2, '0');
 
             // Shows Grid
@@ -30,21 +30,7 @@ namespace Projeto2aEpoca
         {
             Console.WriteLine("Player Stats");
             Console.WriteLine("------------");
-            Console.WriteLine($"\nHP: {player.hp}\n");
-        }
-
-        public void ShowOptions()
-        {
-            Console.WriteLine("Options");
-            Console.WriteLine("-------");
-            Console.WriteLine(
-                "↖ ↑ ↗        7 8 9          (F)Attack Enemy(E) Pick up item"
-                + "(U) Use item(D) Drop item");
-            Console.WriteLine(
-                "←   →   ->   4   6  Move    (L) Look around(H) Help");
-            Console.WriteLine(
-                "↙ ↓ ↘        1 2 3          (S)Save game(Q) Quit game");
-
+            Console.WriteLine($"\nHP: {player.hp.ToString("0.0")}\n");
         }
 
         public void ShowLegend()
@@ -52,7 +38,7 @@ namespace Projeto2aEpoca
             Console.WriteLine(
                 "Options                                 Legend");
             Console.WriteLine(
-                "------                                  ------");
+                "-------                                 ------");
             Console.WriteLine(
                 "↖ ↑ ↗        7 8 9                      \u0398 - Player");
             Console.WriteLine(
@@ -71,12 +57,26 @@ namespace Projeto2aEpoca
                 "(S) Save Game      (Q) Quit Game        ~ - Unexplored");
         }
 
+
+        public void ShowMessage(string m1, string m2, string m3)
+        {
+            Console.WriteLine("Messages:");
+            Console.WriteLine("---------");
+            Console.WriteLine(m1 + "\n");
+            Console.WriteLine(m2 + "\n");
+            Console.WriteLine(m3 + "\n\n\n");
+        }
+
+
+
+
+
         public void DrawMap(Board board, Level level)
         {
             int rows = board.Rows;
             int columns = board.Columns;
             int lines = 5;
-            int space;
+            int cell;
 
             List<int> endSpaces = new List<int>();
 
@@ -92,8 +92,8 @@ namespace Projeto2aEpoca
                 {
                     for (int k = 0; k < columns; k++)
                     {
-                        space = i * columns + k + 1;
-                        string spaceD = space.ToString().PadLeft(3, '0');
+                        cell = i * columns + k + 1;
+                        string spaceD = cell.ToString().PadLeft(3, '0');
 
                         switch (j)
                         {
@@ -102,7 +102,7 @@ namespace Projeto2aEpoca
 
                                 foreach (int endSpace in endSpaces)
                                 {
-                                    if (space == endSpace)
+                                    if (cell == endSpace)
                                     {
                                         Console.Write("+");
                                     }
@@ -115,7 +115,7 @@ namespace Projeto2aEpoca
 
                                 foreach (int endSpace in endSpaces)
                                 {
-                                    if (space == endSpace)
+                                    if (cell == endSpace)
                                     {
                                         Console.Write("|");
                                     }
@@ -124,15 +124,15 @@ namespace Projeto2aEpoca
 
                             case 2:
                                 // "Unexplored"
-                                if (!board.cellList[space-1].hasBeenExplored)
+                                if (!board.cellList[cell - 1].hasBeenExplored)
                                 {
                                     Console.Write("|    ~~~~~    ");
                                 }
                                 // "Exit"
                                 else if (
-                                    level.exit.Row == board.cellList[space - 1]
+                                    level.exit.Row == board.cellList[cell - 1]
                                     .cellRow && level.exit.Column ==
-                                    board.cellList[space - 1].cellColumn)
+                                    board.cellList[cell - 1].cellColumn)
                                 {
                                     Console.Write("|    EXIT!    ");
                                 }
@@ -144,33 +144,33 @@ namespace Projeto2aEpoca
                                     for (int l = 0; l < 5; l++)
                                     {
                                         Console.Write((char)board.
-                                            cellList[space - 1].
-                                            occupantList[l]);
+                                            cellList[cell - 1].
+                                            occupantList.ElementAt(l));
                                     }
                                     Console.Write("    ");
                                 }
 
                                 foreach (int endSpace in endSpaces)
+                                {
+                                    if (cell == endSpace)
                                     {
-                                        if (space == endSpace)
-                                        {
-                                            Console.Write("|");
-                                        }
+                                        Console.Write("|");
                                     }
+                                }
 
                                 break;
 
                             case 3:
                                 // "Unexplored"
-                                if (!board.cellList[space - 1].hasBeenExplored)
+                                if (!board.cellList[cell - 1].hasBeenExplored)
                                 {
                                     Console.Write("|    ~~~~~    ");
                                 }
                                 // "Exit"
                                 else if (
-                                    level.exit.Row == board.cellList[space - 1]
+                                    level.exit.Row == board.cellList[cell - 1]
                                     .cellRow && level.exit.Column ==
-                                    board.cellList[space - 1].cellColumn)
+                                    board.cellList[cell - 1].cellColumn)
                                 {
                                     Console.Write("|    EXIT!    ");
                                 }
@@ -182,14 +182,14 @@ namespace Projeto2aEpoca
                                     for (int l = 5; l < 10; l++)
                                     {
                                         Console.Write((char)board.
-                                            cellList[space - 1].
-                                            occupantList[l]);
+                                            cellList[cell - 1].
+                                            occupantList.ElementAt(l));
                                     }
                                     Console.Write("    ");
                                 }
                                 foreach (int endSpace in endSpaces)
                                 {
-                                    if (space == endSpace)
+                                    if (cell == endSpace)
                                     {
                                         Console.Write("|");
                                     }
@@ -201,7 +201,7 @@ namespace Projeto2aEpoca
 
                                 foreach (int endSpace in endSpaces)
                                 {
-                                    if (space == endSpace)
+                                    if (cell == endSpace)
                                     {
                                         Console.Write("|");
                                     }
@@ -247,6 +247,29 @@ namespace Projeto2aEpoca
                               "Rita Saraiva (a21807278)");
 
             Console.WriteLine("Press any key to return");
+        }
+
+        public void QuitGame()
+        {
+            string option = "";
+            Console.Clear();
+            Console.WriteLine("Are you sure you want to quit? " +
+                "Your progress will be lost...");
+            Console.WriteLine("'Y' / 'N'");
+
+            while (option != "Y" && option != "N")
+            {
+                option = Console.ReadLine();
+                if (option != "Y" && option != "N")
+                {
+                    Console.WriteLine("Answer not valid");
+                }
+            }
+
+            if (option == "Y")
+            {
+                Environment.Exit(0);
+            }
         }
     }
 }

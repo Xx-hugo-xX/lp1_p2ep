@@ -18,11 +18,10 @@ namespace Projeto2aEpoca
         
         public List<Trap> trapList;
 
+        List<Cell> CellList;
         Board Board;
         Player Player;
-
-        List<Cell> CellList;
-
+        
         /* Not Necessary For "Fase 04":
          *  List<Enemy> enemyList = new List<Enemy>();
          */

@@ -9,7 +9,8 @@ namespace Projeto2aEpoca
         // Instance Variables
         public int cellRow, cellColumn;
         public bool hasBeenExplored { get; set; }
-        public occupantType[] occupantList = new occupantType[10];
+
+        public List<occupantType> occupantList = new List<occupantType>();
 
 
         // Possible Cell Occupants
@@ -30,43 +31,47 @@ namespace Projeto2aEpoca
         {
             cellRow = row;
             cellColumn = column;
-            for (int i = 0; i < occupantList.Length; i++)
-            {
-                occupantList[i] = occupantType.empty;
-            }
+
             hasBeenExplored = false;
         }
-        
+
+
         // Checks Cell Occupants and Adds Them To The List
         public void CheckOccupants(Player player, Level level)
         {
-            if (level.exit.Row == cellRow &&
-                level.exit.Column == cellColumn)
-            {
-                occupantList[0] = occupantType.exit;
-            }
+            occupantList.Clear();
+
+            int occupants = 0;
 
             if (player.playerPosition.Row == cellRow &&
                 player.playerPosition.Column == cellColumn)
             {
-                occupantList[0] = occupantType.player;
+                occupantList.Add(occupantType.player);
+                occupants++;
                 hasBeenExplored = true;
             }
 
-            else occupantList[0] = occupantType.empty;
 
             if (!player.hasMap && level.map.Row == cellRow &&
                 level.map.Column == cellColumn)
             {
-                occupantList[9] = occupantType.map;
+                occupantList.Add(occupantType.map);
+                occupants++;
             }
 
-            else occupantList[9] = occupantType.empty;
-
-            if (level.exit.Row == cellRow &&
-                     level.exit.Column == cellColumn)
+            foreach (Trap trap in level.trapList)
             {
-                occupantList[0] = occupantType.exit;
+                if (trap.Row == cellRow && trap.Column == cellColumn &&
+                    !trap.fallenInto)
+                {
+                    occupantList.Add(occupantType.trap);
+                    occupants++;
+                }
+            }
+
+            for (int i = 0; i < (10 - occupants); i++)
+            {
+                occupantList.Add(occupantType.empty);
             }
         }
     }
