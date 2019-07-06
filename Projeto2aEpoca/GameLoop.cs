@@ -60,23 +60,27 @@ namespace Projeto2aEpoca
                 bool finishedLevel = false;
                 bool madeTurn = false;
 
-                string m1 = "";
-                string m2 = "";
-                string m3 = "";
+                // Messages To Be Rendered
+                string m1;
+                string m2;
+                string m3;
 
                 while (!finishedLevel)
                 {
                     madeTurn = false;
 
+                    // Restart Messages For New Turn
                     m1 = "";
                     m2 = "";
                     m3 = "";
 
                     foreach (Trap trap in Level.trapList)
                     {
+                        // Displays Trap(s) Name/Damage Dealt If Activated
                         if (Player.playerPosition.Row == trap.Row &&
                             Player.playerPosition.Column == trap.Column)
                         {
+                            // Pushes Recent Messages To Top Of Render
                             if (!trap.fallenInto)
                             {
                                 m3 = m2;
@@ -90,16 +94,13 @@ namespace Projeto2aEpoca
                     if (Player.hp <= 0.0f)
                     {
                         Player.PlayerDeath();
-                        Environment.Exit(0);
                     }
 
                     foreach (Cell cell in Board.cellList)
                     {
                         cell.CheckOccupants(Player, Level);
                     }
-
-
-
+                    
                     // Renderer
                     Renderer.ShowGameValues(Board, Level);
                     Renderer.ShowPlayerStats(Player);
@@ -139,12 +140,13 @@ namespace Projeto2aEpoca
                         }
                     }
 
+                    // "QuitGame"
                     else if (moveOption == "Q")
                     {
                         Renderer.QuitGame();
                     }
 
-                    // Checks If Player's in Exit Cell
+                    // Begins Change To Next Level if Player's in 'EXIT' Cell
                     if (Player.playerPosition.Row == Level.exit.Row &&
                         Player.playerPosition.Column == Level.exit.Column)
                     {
@@ -152,14 +154,13 @@ namespace Projeto2aEpoca
                         finishedLevel = true;
                     }
 
-                    // When Turn Ends Decreases Player's Health (-1 hp) 
+                    // Decreases Player's Health (-1 hp) when Turn Ends 
                     if (madeTurn) Player.hp -= 1.0f;
 
-                    // Ends Game When Player's Health Is Equal/Below 0
+                    // Ends Game when Player's Health Is Equal/Below 0
                     if (Player.hp <= 0.0f)
                     {
                         Player.PlayerDeath();
-                        Environment.Exit(0);
                     }
 
                     Console.Clear();

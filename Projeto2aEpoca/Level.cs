@@ -38,12 +38,14 @@ namespace Projeto2aEpoca
             
             currentLevel = 1;
         }
-
-
+        
         public void StartNewLevel()
         {
+            // Level Difficulty
             currentLevelDifficulty = currentLevel + Board.Difficulty;
-            numberOfTraps = numberOfCells * (currentLevelDifficulty) / 50;
+
+            // Number Of Traps (According To Cells and Level Difficulty)
+            numberOfTraps = numberOfCells * (currentLevelDifficulty) / 25;
 
             CellList.Clear();
             trapList.Clear();
@@ -73,22 +75,28 @@ namespace Projeto2aEpoca
                                    random.Next(Board.Columns));
             }
 
+            // Creates Array With Possible 'TrapTypes'
             Array types = Enum.GetValues(typeof(TrapTypes));
+            
             for (int i = 0; i < numberOfTraps; i++)
             {
                 int row = 0;
                 int column = 0;
 
+                // Sets Trap Type (Randomly)
                 TrapTypes randomType = 
                     (TrapTypes)types.GetValue(random.Next(types.Length));
 
                 bool validPosition = false;
-
+                
+                // Loops Until Trap's Position Is Valid
                 while (!validPosition)
                 {
+                    // Sets Trap's Position (Cell)
                     row = random.Next(Board.Rows);
                     column = random.Next(Board.Columns);
 
+                    // Restricts Trap's Position
                     if (row == exit.Row && column == exit.Column)
                     {
                         continue;
@@ -98,13 +106,13 @@ namespace Projeto2aEpoca
                     {
                         continue;
                     }
+
                     else validPosition = true;
                 }
-
+                // Adds Trap To 'trapList'
                 trapList.Add(new Trap(randomType, row, column));
             }
         }
-
         // Begin Change To Next Level
         public void NextLevel()
         {

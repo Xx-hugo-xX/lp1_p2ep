@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Projeto2aEpoca
 {
+    // Traps and Correspondent MaxDamage
     public enum TrapTypes
     {
         Bugs = 4,

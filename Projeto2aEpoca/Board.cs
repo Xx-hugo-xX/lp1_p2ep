@@ -19,7 +19,7 @@ namespace Projeto2aEpoca
             cellList = new List<Cell>();
         }
 
-        // Changes All Cells To Explored State
+        // Changes All Cell's State To 'Explored'
         public void exploreAllCells()
         {
             foreach (Cell cell in cellList)

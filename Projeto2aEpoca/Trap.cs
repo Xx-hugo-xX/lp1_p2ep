@@ -6,16 +6,18 @@ namespace Projeto2aEpoca
 {
     public class Trap
     {
+        // Instance Variables
         public int Row;
         public int Column;
+        public int maxDamage;
 
         public TrapTypes Type;
-        public int maxDamage;
 
         public bool fallenInto { get; private set; }
 
         private static Random random = new Random();
-
+        
+        // Constructor Method 
         public Trap(TrapTypes type, int row, int column)
         {
             Type = type;
@@ -27,6 +29,7 @@ namespace Projeto2aEpoca
             fallenInto = false;
         }
 
+        // Sets DamageDealt (0 to maxDamage) and Shows Activation Message
         public string dealDamage(Player player)
         {
             Random random = new Random();
@@ -35,7 +38,8 @@ namespace Projeto2aEpoca
             player.hp -= damage;
             fallenInto = true;
 
-            string trapMessage = $"You activated the trap {Type} and lost {damage.ToString("0.0")}HP";
+            string trapMessage = $"You activated the trap {Type} " +
+                                 $"and lost {damage.ToString("0.0")}HP";
             return trapMessage;
         }
     }

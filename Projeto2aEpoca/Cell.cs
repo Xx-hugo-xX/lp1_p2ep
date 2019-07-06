@@ -16,13 +16,13 @@ namespace Projeto2aEpoca
         // Possible Cell Occupants
         public enum occupantType
         {
-            empty = '.',
+            empty  = '.',
             player = '\u0398',
-            enemy = '\u03A8',
-            food = '\u03A9',
+            enemy  = '\u03A8',
+            food   = '\u03A9',
             weapon = '\u03EF',
-            trap = '\u0416',
-            map = '\u0524',
+            trap   = '\u0416',
+            map    = '\u0524',
             exit
         };
 
@@ -35,14 +35,15 @@ namespace Projeto2aEpoca
             hasBeenExplored = false;
         }
 
-
-        // Checks Cell Occupants and Adds Them To The List
+        // Checks Cell Occupants and Adds Them To 'occupantList'
         public void CheckOccupants(Player player, Level level)
         {
             occupantList.Clear();
 
+            // Counter For Occupied Spaces In occupantList
             int occupants = 0;
 
+            // Player
             if (player.playerPosition.Row == cellRow &&
                 player.playerPosition.Column == cellColumn)
             {
@@ -51,7 +52,7 @@ namespace Projeto2aEpoca
                 hasBeenExplored = true;
             }
 
-
+            // Map
             if (!player.hasMap && level.map.Row == cellRow &&
                 level.map.Column == cellColumn)
             {
@@ -59,6 +60,7 @@ namespace Projeto2aEpoca
                 occupants++;
             }
 
+            // Traps
             foreach (Trap trap in level.trapList)
             {
                 if (trap.Row == cellRow && trap.Column == cellColumn &&
@@ -69,6 +71,7 @@ namespace Projeto2aEpoca
                 }
             }
 
+            // Fills Remaining (Non-Occupied) Spaces With 'occupantType.empty'
             for (int i = 0; i < (10 - occupants); i++)
             {
                 occupantList.Add(occupantType.empty);
