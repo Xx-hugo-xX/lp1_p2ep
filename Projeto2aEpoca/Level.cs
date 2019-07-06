@@ -6,6 +6,12 @@ namespace Projeto2aEpoca
 {
     public class Level
     {
+        /// <summary>
+        /// Creates new levels, and the positions of the player, exit, map
+        /// and traps
+        /// </summary>
+        
+
         // Instance Variables
         public int currentLevel;
         public int currentLevelDifficulty;
@@ -40,7 +46,7 @@ namespace Projeto2aEpoca
         }
         
         public void StartNewLevel()
-        {
+        {   
             // Level Difficulty
             currentLevelDifficulty = currentLevel + Board.Difficulty;
 
@@ -113,9 +119,13 @@ namespace Projeto2aEpoca
                 trapList.Add(new Trap(randomType, row, column));
             }
         }
-        // Begin Change To Next Level
+        
         public void NextLevel()
         {
+            /// <summary>
+            /// Begin Change To Next Level
+            /// </summary>
+
             currentLevel++;
         }
     }

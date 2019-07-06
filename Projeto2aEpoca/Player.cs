@@ -6,6 +6,10 @@ namespace Projeto2aEpoca
 {
     public class Player : Character
     {
+        /// <summary>
+        /// Player's Movement
+        /// </summary>
+
         // Instance Variables
         public double hp;
         public bool hasMoved;
@@ -21,6 +25,7 @@ namespace Projeto2aEpoca
 
         public void Move(string direction, Board board)
         {
+            
             Position wantedPosition = new Position(0,0);
             hasMoved = false;
 
@@ -163,9 +168,12 @@ namespace Projeto2aEpoca
             }
         }
 
-        // Shows "Game Over" Message
         public void PlayerDeath()
         {
+            /// <summary>
+            /// Shows "Game Over" Message
+            /// </summary>
+
             Console.Clear();
             Console.WriteLine("Your HP Reached 0. You Lost.");
             Environment.Exit(0);
