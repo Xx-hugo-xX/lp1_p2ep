@@ -159,7 +159,6 @@ namespace Projeto2aEpoca
                     if (Player.hp <= 0.0f)
                     {
                         Player.PlayerDeath();
-                        Environment.Exit(0);
                     }
 
                     Console.Clear();

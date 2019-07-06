@@ -168,7 +168,7 @@ namespace Projeto2aEpoca
         {
             Console.Clear();
             Console.WriteLine("Your HP Reached 0. You Lost.");
-            Console.ReadLine();
+            Environment.Exit(0);
         }
     }
 }
