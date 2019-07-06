@@ -6,6 +6,11 @@ namespace Projeto2aEpoca
 {
     class GameLoop
     {
+        /// <summary>
+        /// Contains the method PlayGame and runs the game loop. 
+        /// </summary>
+        
+        
         // Instance Variables
         Board Board;
         Renderer Renderer;

@@ -6,6 +6,10 @@ namespace Projeto2aEpoca
 {
     public class Character
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        
         // Instance Variables
         float hp = 100;
     }

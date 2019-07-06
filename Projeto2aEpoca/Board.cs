@@ -6,6 +6,10 @@ namespace Projeto2aEpoca
 {
     public class Board
     {
+        /// <summary>
+        /// Creats the game board
+        /// </summary>
+       
         // Instance Variables
         public int Rows, Columns, Difficulty;
         public List<Cell> cellList;
