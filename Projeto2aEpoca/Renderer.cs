@@ -57,7 +57,7 @@ namespace Projeto2aEpoca
                 "(S) Save Game      (Q) Quit Game        ~ - Unexplored");
         }
 
-
+        // Shows Messages (Trap Activation)
         public void ShowMessage(string m1, string m2, string m3)
         {
             Console.WriteLine("Messages:");
@@ -66,11 +66,7 @@ namespace Projeto2aEpoca
             Console.WriteLine(m2 + "\n");
             Console.WriteLine(m3 + "\n\n\n");
         }
-
-
-
-
-
+        
         public void DrawMap(Board board, Level level)
         {
             int rows = board.Rows;
@@ -86,14 +82,17 @@ namespace Projeto2aEpoca
                 endSpaces.Add(spaceAdded);
             }
 
+            // For Every Row
             for (int i = 0; i < rows; i++)
             {
+                // For Every 'Line'
                 for (int j = 0; j < lines; j++)
                 {
+                    // For Every Column
                     for (int k = 0; k < columns; k++)
                     {
+                        // Calculates Number Of Cell
                         cell = i * columns + k + 1;
-                        string spaceD = cell.ToString().PadLeft(3, '0');
 
                         switch (j)
                         {
@@ -107,7 +106,6 @@ namespace Projeto2aEpoca
                                         Console.Write("+");
                                     }
                                 }
-
                                 break;
 
                             case 1:
@@ -121,13 +119,15 @@ namespace Projeto2aEpoca
                                     }
                                 }
                                 break;
-
+                            
+                            // Cell Details (1)
                             case 2:
                                 // "Unexplored"
                                 if (!board.cellList[cell - 1].hasBeenExplored)
                                 {
                                     Console.Write("|    ~~~~~    ");
                                 }
+
                                 // "Exit"
                                 else if (
                                     level.exit.Row == board.cellList[cell - 1]
@@ -136,6 +136,7 @@ namespace Projeto2aEpoca
                                 {
                                     Console.Write("|    EXIT!    ");
                                 }
+
                                 // "Explored"
                                 else
                                 {
@@ -157,15 +158,16 @@ namespace Projeto2aEpoca
                                         Console.Write("|");
                                     }
                                 }
-
                                 break;
 
+                            // Cell Details (2)
                             case 3:
                                 // "Unexplored"
                                 if (!board.cellList[cell - 1].hasBeenExplored)
                                 {
                                     Console.Write("|    ~~~~~    ");
                                 }
+
                                 // "Exit"
                                 else if (
                                     level.exit.Row == board.cellList[cell - 1]
@@ -174,6 +176,7 @@ namespace Projeto2aEpoca
                                 {
                                     Console.Write("|    EXIT!    ");
                                 }
+
                                 // "Explored"
                                 else
                                 {
@@ -187,6 +190,7 @@ namespace Projeto2aEpoca
                                     }
                                     Console.Write("    ");
                                 }
+
                                 foreach (int endSpace in endSpaces)
                                 {
                                     if (cell == endSpace)
@@ -219,32 +223,27 @@ namespace Projeto2aEpoca
             }
             Console.Write("\n\n");
         }
-
-
-        void PrintCell()
-        {
-            // Not Necessary For "Fase 03"
-        }
-
+        
         public void MainMenu()
         {
-            Console.WriteLine("1. New Game    \n" + "2. High Scores \n" +
-                              "3. Credits     \n" + "4. Quit        \n");
+            Console.WriteLine("1. New Game    \n" + 
+                              "2. High Scores \n" +
+                              "3. Credits     \n" + 
+                              "4. Quit        \n");
         }
 
         public void HighScores()
         {
-            // Not Necessary For "Fase 03"
+            // Not Necessary For "Fase 04"
             Console.WriteLine("Press any key to return");
-
         }
 
         public void Credits()
         {
-            Console.WriteLine("This program was made by:\n " +
-                              "Hugo Feliciano (a21805809)\n" +
-                              "Pedro Fernandes (a21803791)\n" +
-                              "Rita Saraiva (a21807278)");
+            Console.WriteLine("This program was made by:\n\n" +
+                              "\tHugo Feliciano  (a21805809)\n" +
+                              "\tPedro Fernandes (a21803791)\n" +
+                              "\tRita Saraiva    (a21807278)\n\n");
 
             Console.WriteLine("Press any key to return");
         }
@@ -254,7 +253,8 @@ namespace Projeto2aEpoca
             string option = "";
             Console.Clear();
             Console.WriteLine("Are you sure you want to quit? " +
-                "Your progress will be lost...");
+                              "Your progress will be lost...");
+
             Console.WriteLine("'Y' / 'N'");
 
             while (option != "Y" && option != "N")
