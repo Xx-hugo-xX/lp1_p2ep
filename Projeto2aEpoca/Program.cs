@@ -49,6 +49,12 @@ namespace Projeto2aEpoca
             Level level = new Level(board, player);
             GameLoop gameLoop = new GameLoop(board, renderer, level, player);
 
+
+            HighScores highScores = new HighScores(board);
+
+            highScores.CreateNewFile();
+
+
             gameLoop.PlayGame();
         }
     }

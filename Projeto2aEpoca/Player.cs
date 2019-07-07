@@ -12,6 +12,7 @@ namespace Projeto2aEpoca
 
         // Instance Variables
         public double hp;
+        public int score;
         public bool hasMoved;
         public Position playerPosition;
         public bool hasMap;
@@ -21,6 +22,7 @@ namespace Projeto2aEpoca
         {
             playerPosition = new Position(row, column);
             hp = 100.0f;
+            score = 0;
         }
 
         public void Move(string direction, Board board)
