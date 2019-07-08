@@ -6,6 +6,13 @@ namespace Projeto2aEpoca
 {
     public class Renderer
     {
+        /// <summary>
+        /// Contains all the functions of to draw the map, menus, and the 
+        /// text during the game.
+        /// </summary>
+        /// <param name="board"></param>
+        /// <param name="level"></param>
+        
         public void ShowGameValues(Board board, Level level)
         {
             // Shows Current Level

@@ -5,6 +5,12 @@ namespace Projeto2aEpoca
 {
     class Program
     {
+        /// <summary>
+        /// Contains main method. Runs program and takes arguments given in 
+        /// console
+        /// </summary>
+        /// <param name="args"></param>
+
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;

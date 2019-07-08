@@ -6,6 +6,10 @@ namespace Projeto2aEpoca
 {
     public class Trap
     {
+        /// <summary>
+        /// Saves all the information about all traps
+        /// </summary>
+        
         // Instance Variables
         public int Row;
         public int Column;
@@ -29,9 +33,12 @@ namespace Projeto2aEpoca
             fallenInto = false;
         }
 
-        // Sets DamageDealt (0 to maxDamage) and Shows Activation Message
         public string dealDamage(Player player)
         {
+            /// <summary>
+            /// Sets DamageDealt (0 to maxDamage) and Shows Activation Message
+            /// </summary>
+
             Random random = new Random();
 
             double damage = random.NextDouble() * maxDamage;

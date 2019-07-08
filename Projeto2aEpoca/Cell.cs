@@ -6,6 +6,10 @@ namespace Projeto2aEpoca
 {
     public class Cell
     {
+        /// <summary>
+        /// Saves the information about each cell
+        /// </summary>
+        
         // Instance Variables
         public int cellRow, cellColumn;
         public bool hasBeenExplored { get; set; }
@@ -35,9 +39,13 @@ namespace Projeto2aEpoca
             hasBeenExplored = false;
         }
 
-        // Checks Cell Occupants and Adds Them To 'occupantList'
         public void CheckOccupants(Player player, Level level)
         {
+            /// <summary>
+            /// Checks Cell Occupants and Adds Them To 'occupantList' and
+            /// fills Remaining (Non-Occupied) Spaces With 'occupantType.empty'
+            /// </summary>
+
             occupantList.Clear();
 
             // Counter For Occupied Spaces In occupantList
@@ -71,7 +79,6 @@ namespace Projeto2aEpoca
                 }
             }
 
-            // Fills Remaining (Non-Occupied) Spaces With 'occupantType.empty'
             for (int i = 0; i < (10 - occupants); i++)
             {
                 occupantList.Add(occupantType.empty);
