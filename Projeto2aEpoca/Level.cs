@@ -44,7 +44,6 @@ namespace Projeto2aEpoca
         public void StartNewLevel()
         {
             Player.hasMap = false;
-
             // Level Difficulty
             currentLevelDifficulty = currentLevel + Board.Difficulty;
 

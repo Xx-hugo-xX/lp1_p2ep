@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 
 namespace Projeto2aEpoca
 {
@@ -37,7 +38,8 @@ namespace Projeto2aEpoca
         {
             Console.WriteLine("Player Stats");
             Console.WriteLine("------------");
-            Console.WriteLine($"\nHP: {player.hp.ToString("0.0")}\n");
+            Console.WriteLine($"\nHP: {player.hp.ToString("0.0")}\t" +
+                              $"Score: {player.score.ToString("0.0")}\n");
         }
 
         public void ShowLegend()
@@ -71,7 +73,7 @@ namespace Projeto2aEpoca
             Console.WriteLine("---------");
             Console.WriteLine(m1 + "\n");
             Console.WriteLine(m2 + "\n");
-            Console.WriteLine(m3 + "\n\n\n");
+            Console.WriteLine(m3 + "\n\n");
         }
         
         public void DrawMap(Board board, Level level)
@@ -239,10 +241,28 @@ namespace Projeto2aEpoca
                               "4. Quit        \n");
         }
 
-        public void HighScores()
+        public void HighScores(Board board)
         {
-            // Not Necessary For "Fase 04"
-            Console.WriteLine("Press any key to return");
+            string fileName = $"HighScores_{board.Rows}x{board.Columns}.txt";
+            char separator = '\t';
+
+            StreamReader sr = new StreamReader(fileName);
+            string s;
+
+            Console.WriteLine($"+++++++++ {board.Rows}x{board.Columns} " +
+                              $"HighScores +++++++++\n");
+
+            while ((s = sr.ReadLine()) != null)
+            {
+                string[] nameAndScore = s.Split(separator);
+                string name = nameAndScore[0];
+                float score = Convert.ToSingle(nameAndScore[1]);
+                Console.WriteLine($"Player: {name}\tScore: {score,4}");
+            }
+
+            Console.WriteLine("\n\nPress any key to return");
+
+            sr.Close();
         }
 
         public void Credits()
@@ -277,6 +297,15 @@ namespace Projeto2aEpoca
             {
                 Environment.Exit(0);
             }
+        }
+
+        public void HowToUse()
+        {
+            Console.WriteLine("Here's an example of how to use the arguments:" +
+                "\n\tdotnet run -- -r 7 -c 8 -d 5\n" +
+                "\t-r represents the number of rows in the board" +
+                "\t-c represents the number of columns in the board" +
+                "\t-d represents the difficulty of the game you're playing");
         }
     }
 }

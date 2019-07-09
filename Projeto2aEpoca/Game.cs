@@ -266,7 +266,6 @@ namespace Projeto2aEpoca
                             Board.exploreAllCells();
                             madeTurn = true;
                         }
-                        Board.exploreAllCells(); //REMOVE BEFORE COMMIT
                     }
 
                     // "QuitGame"
