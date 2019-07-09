@@ -7,14 +7,17 @@ namespace Projeto2aEpoca
     public class Board
     {
         /// <summary>
-        /// Creats the game board
+        /// Instance Variable
         /// </summary>
-       
-        // Instance Variables
         public int Rows, Columns, Difficulty;
         public List<Cell> cellList;
 
-        // Constructor Method
+        /// <summary>
+        /// Creates An Instance Of 'Board'
+        /// </summary>
+        /// <param name="rows">Rows For The Board</param>
+        /// <param name="columns">Columns For The Board</param>
+        /// <param name="difficulty">Difficulty For The Game</param>
         public Board(int rows, int columns, int difficulty)
         {
             Rows = rows;
@@ -23,7 +26,9 @@ namespace Projeto2aEpoca
             cellList = new List<Cell>();
         }
 
-        // Changes All Cell's State To 'Explored'
+        /// <summary>
+        /// Sets All Cell's State To Explored
+        /// </summary>
         public void exploreAllCells()
         {
             foreach (Cell cell in cellList)

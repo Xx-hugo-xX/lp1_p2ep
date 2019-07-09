@@ -7,12 +7,8 @@ namespace Projeto2aEpoca
     public class Level
     {
         /// <summary>
-        /// Creates new levels, and the positions of the player, exit, map
-        /// and traps
+        /// Instance Variables
         /// </summary>
-        
-
-        // Instance Variables
         public int currentLevel;
         public int currentLevelDifficulty;
 
@@ -21,14 +17,18 @@ namespace Projeto2aEpoca
 
         public Position exit;
         public Position map;
-        
+
         public List<Trap> trapList;
 
         List<Cell> CellList;
         Board Board;
         Player Player;
 
-        // Constructor Method
+        /// <summary>
+        /// Creates An Instance of 'Level'
+        /// </summary>
+        /// <param name="board">Board To Use Defined Rows And Columns</param>
+        /// <param name="player">Player To Set It's Initial Position</param>
         public Level(Board board, Player player)
         {
             Board = board;
@@ -37,10 +37,15 @@ namespace Projeto2aEpoca
 
             numberOfCells = Board.Rows * Board.Columns;
             trapList = new List<Trap>();
-            
+
             currentLevel = 1;
         }
-        
+
+        /// <summary>
+        /// Starts A New Level, Resets The Necessary Variables For Each One
+        /// And Randomizes a New Position For The Player, For The Exit,
+        /// For The Map And For Each Trap in 'trapList'
+        /// </summary>
         public void StartNewLevel()
         {
             Player.hasMap = false;
@@ -52,7 +57,7 @@ namespace Projeto2aEpoca
 
             CellList.Clear();
             trapList.Clear();
-            
+
             // Create Cell's According To Grid Size
             for (int i = 0; i < Board.Rows; i++)
             {
@@ -61,7 +66,7 @@ namespace Projeto2aEpoca
                     CellList.Add(new Cell(i, j));
                 }
             }
-            
+
             Random random = new Random();
 
             // Sets Player's Beginning Position (Cell)
@@ -80,18 +85,18 @@ namespace Projeto2aEpoca
 
             // Creates Array With Possible 'TrapTypes'
             Array types = Enum.GetValues(typeof(TrapTypes));
-            
+
             for (int i = 0; i < numberOfTraps; i++)
             {
                 int row = 0;
                 int column = 0;
 
                 // Sets Trap Type (Randomly)
-                TrapTypes randomType = 
+                TrapTypes randomType =
                     (TrapTypes)types.GetValue(random.Next(types.Length));
 
                 bool validPosition = false;
-                
+
                 // Loops Until Trap's Position Is Valid
                 while (!validPosition)
                 {
@@ -116,13 +121,12 @@ namespace Projeto2aEpoca
                 trapList.Add(new Trap(randomType, row, column));
             }
         }
-        
+
+        /// <summary>
+        /// Sets The Current Level As The Next Level
+        /// </summary>
         public void NextLevel()
         {
-            /// <summary>
-            /// Begin Change To Next Level
-            /// </summary>
-
             currentLevel++;
         }
     }

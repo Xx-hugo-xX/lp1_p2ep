@@ -6,11 +6,17 @@ namespace Projeto2aEpoca
 {
     public class Position
     {
-        // Instance Variables
+        /// <summary>
+        /// Instance Variables
+        /// </summary>
         public int Row { get; set; }
         public int Column { get; set; }
 
-        // Constructor Method
+        /// <summary>
+        /// Creates An Instance Of Position
+        /// </summary>
+        /// <param name="row">Sets Row For The Position</param>
+        /// <param name="column">Sets Column For The Position</param>
         public Position(int row, int column)
         {
             Row = row;

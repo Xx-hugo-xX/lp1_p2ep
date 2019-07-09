@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Projeto2aEpoca
-{  
+{
+    /// <summary>
+    /// Sets The Possible Trap Types and Correspondent MaxDamage
+    /// </summary>
     public enum TrapTypes
     {
-        /// <summary>
-        /// Traps and Correspondent MaxDamage
-        /// </summary>
-        
         Bugs = 4,
         ColdBreeze = 5,
         BearTrap = 10,

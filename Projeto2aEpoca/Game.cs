@@ -7,27 +7,26 @@ namespace Projeto2aEpoca
     class Game
     {
         /// <summary>
-        /// Contains the method MainLoop and runs the game loop, creates a
-        /// game instance and handles the highscores
+        /// Instance Variables
         /// </summary>
-
-
-        // Instance Variables
         Board Board;
         Renderer Renderer;
         Level Level;
         Player Player;
 
-
-
         string fileName;
         char separator;
         List<HighScore> scoreList;
 
-
-        // Constructor Method
-        public Game(
-            Board board, Renderer renderer, Level level, Player player)
+        /// <summary>
+        /// Creates An Instance Of 'Game'
+        /// </summary>
+        /// <param name="board">Board To Use Defined Rows And Columns</param>
+        /// <param name="renderer">Renderer For Displays</param>
+        /// <param name="level">
+        /// Level To Create The Exit, The Map And The Traps</param>
+        /// <param name="player">Player That Moves Through The Board</param>
+        public Game(Board board, Renderer renderer, Level level, Player player)
         {
             Board = board;
             Renderer = renderer;
@@ -38,10 +37,15 @@ namespace Projeto2aEpoca
             separator = '\t';
         }
 
-
+        /// <summary>
+        /// Creates A File For The HighScores, And If The File 
+        /// Already Exists, Adds The Existing Scores To 'scoreList'
+        /// </summary>
         public void CreateHighScores()
         {
             scoreList = new List<HighScore>();
+
+            // Creates A New File If It Doesn't Exist Already
             if (!File.Exists(fileName))
             {
                 using (StreamWriter sw = File.CreateText(fileName))
@@ -51,8 +55,12 @@ namespace Projeto2aEpoca
 
             StreamReader sr = new StreamReader(fileName);
             char separator = '\t';
-
             string s;
+
+            /*
+             *Reads Scores And Adds Them To
+             *'scoreList' So They Can Be Compared
+             */
             while ((s = sr.ReadLine()) != null)
             {
                 string[] nameAndScore = s.Split(separator);
@@ -60,12 +68,19 @@ namespace Projeto2aEpoca
                 float score = Convert.ToSingle(nameAndScore[1]);
                 scoreList.Add(new HighScore(name, score));
             }
+            // Closes File So It Can Be Accessed In Other Methods
             sr.Close();
         }
 
+        /// <summary>
+        /// Adds The Player's Score To 'scoreList' If It's
+        /// Better Than The Worst One
+        /// </summary>
         public void AddScore()
         {
             string name;
+
+            // If 'scoreList' Isn't Full, Add Player To The List
             if (scoreList.Count < 8)
             {
                 Console.Clear();
@@ -78,9 +93,10 @@ namespace Projeto2aEpoca
                 scoreList.Add(new HighScore(name, Player.score));
                 SortHighScores();
             }
-
+            //If 'scoreList' Is Full
             else
             {
+                // Checks If Player's Score Is Better Than Any Score In The List
                 bool isHigher = false;
                 for (int i = 0; i < scoreList.Count; i++)
                 {
@@ -89,6 +105,8 @@ namespace Projeto2aEpoca
                         isHigher = true;
                     }
                 }
+
+                // Adds Score If It's Better
                 if (isHigher)
                 {
                     Console.Clear();
@@ -105,18 +123,27 @@ namespace Projeto2aEpoca
             }
         }
 
-
+        /// <summary>
+        /// Sorts HighScore With The Given Comparer And
+        /// If The Player's Score Was Added To 'scoreList', 
+        /// Removes The Lowest Score
+        /// </summary>
         public void SortHighScores()
         {
+            // Sorts HighScores With The Given Comparer
+
             scoreList.Sort(new ScoreComparer());
 
+            //If A Score Was Added, Remove The Lowest Score
             if (scoreList.Count > 8)
             {
                 scoreList.RemoveAt(8);
             }
         }
 
-
+        /// <summary>
+        /// Rewrites HighScores Using The Changed Values of 'scoreList'
+        /// </summary>
         public void SaveHighScores()
         {
             StreamWriter sw = new StreamWriter(fileName);
@@ -128,7 +155,9 @@ namespace Projeto2aEpoca
             sw.Close();
         }
 
-
+        /// <summary>
+        /// Runs All HighScore Functions
+        /// </summary>
         public void HighScoreManagement()
         {
             AddScore();
@@ -136,11 +165,13 @@ namespace Projeto2aEpoca
             SaveHighScores();
         }
 
-
+        /// <summary>
+        /// Runs The GameLoop
+        /// </summary>
         public void MainLoop()
         {
+            // Run function to create HighScore file
             CreateHighScores();
-
 
             // Instance Variables
             bool playing = false;
@@ -155,24 +186,30 @@ namespace Projeto2aEpoca
                 string option = Console.ReadLine();
                 Console.Clear();
 
-                // Reacts To Input In MainMenu
+                // Starts Game
                 if (option == "1")
                 {
                     playing = true;
                 }
+
+                // Displays HighScores
                 else if (option == "2")
                 {
                     Renderer.HighScores(Board);
                     Console.ReadLine();
                 }
+
+                // Displays Credits
                 else if (option == "3")
                 {
                     Renderer.Credits();
                     Console.ReadLine();
                 }
+
+                // Displays 'QuitGame' Menu
                 else if (option == "4")
                 {
-                    Environment.Exit(0);
+                    Renderer.QuitGame();
                 }
             }
 
@@ -232,7 +269,7 @@ namespace Projeto2aEpoca
                     // Renderer
                     Renderer.ShowGameValues(Board, Level);
                     Renderer.ShowPlayerStats(Player);
-                    Renderer.DrawMap(Board, Level);
+                    Renderer.DrawBoard(Board, Level);
                     Renderer.ShowMessage(m1, m2, m3);
                     Renderer.ShowLegend();
 
