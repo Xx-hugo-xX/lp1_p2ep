@@ -27,10 +27,6 @@ namespace Projeto2aEpoca
         List<Cell> CellList;
         Board Board;
         Player Player;
-        
-        /* Not Necessary For "Fase 04":
-         *  List<Enemy> enemyList = new List<Enemy>();
-         */
 
         // Constructor Method
         public Level(Board board, Player player)
@@ -46,7 +42,9 @@ namespace Projeto2aEpoca
         }
         
         public void StartNewLevel()
-        {   
+        {
+            Player.hasMap = false;
+
             // Level Difficulty
             currentLevelDifficulty = currentLevel + Board.Difficulty;
 
