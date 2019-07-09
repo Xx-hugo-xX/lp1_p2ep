@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Projeto2aEpoca
+﻿namespace Projeto2aEpoca
 {
     /// <summary>
     /// Sets The Possible Trap Types and Correspondent MaxDamage
