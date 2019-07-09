@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Projeto2aEpoca
+﻿namespace Projeto2aEpoca
 {
-    
+    /// <summary>
+    /// Sets The Possible Cell Occupants
+    /// </summary>
     public enum OccupantTypes
     {
-        /// <summary>
-        /// Possible Cell Occupants
-        /// </summary>
         empty = '.',
         player = '\u0398',
         enemy = '\u03A8',

@@ -8,12 +8,10 @@ namespace Projeto2aEpoca
     public class Renderer
     {
         /// <summary>
-        /// Contains all the functions of to draw the map, menus, and the 
-        /// text during the game.
+        /// Displays Current Level, Difficulty And Board Size
         /// </summary>
-        /// <param name="board"></param>
-        /// <param name="level"></param>
-        
+        /// <param name="board">Board To Use Defined Rows And Columns</param>
+        /// <param name="level">Level That Stores The Current Level</param>
         public void ShowGameValues(Board board, Level level)
         {
             // Shows Current Level
@@ -34,6 +32,10 @@ namespace Projeto2aEpoca
                 $" {columnsDisplay} ++++++++++++++++\n\n");
         }
 
+        /// <summary>
+        /// Displayers Players Stats (HP And Score)
+        /// </summary>
+        /// <param name="player">Player That Contains The HP And Score</param>
         public void ShowPlayerStats(Player player)
         {
             Console.WriteLine("Player Stats");
@@ -42,6 +44,9 @@ namespace Projeto2aEpoca
                               $"Score: {player.score.ToString("0.0")}\n");
         }
 
+        /// <summary>
+        /// Displays The Input Options And The Legend For The Board Symbols
+        /// </summary>
         public void ShowLegend()
         {
             Console.WriteLine(
@@ -66,7 +71,12 @@ namespace Projeto2aEpoca
                 "(S) Save Game      (Q) Quit Game        ~ - Unexplored");
         }
 
-        // Shows Messages (Trap Activation)
+        /// <summary>
+        /// Displays Event Messages 
+        /// </summary>
+        /// <param name="m1">First Message</param>
+        /// <param name="m2">Second Message</param>
+        /// <param name="m3">Third Message</param>
         public void ShowMessage(string m1, string m2, string m3)
         {
             Console.WriteLine("Messages:");
@@ -75,20 +85,28 @@ namespace Projeto2aEpoca
             Console.WriteLine(m2 + "\n");
             Console.WriteLine(m3 + "\n\n");
         }
-        
-        public void DrawMap(Board board, Level level)
+
+        /// <summary>
+        /// Draws The Board
+        /// </summary>
+        /// <param name="board">Board To Use Defined Rows And Columns</param>
+        /// <param name="level">
+        /// Level To Use It's Exit And Traps Positions</param>
+        public void DrawBoard(Board board, Level level)
         {
+            // Instance Variables
             int rows = board.Rows;
             int columns = board.Columns;
             int lines = 5;
             int cell;
 
-            List<int> endSpaces = new List<int>();
+            List<int> endCells = new List<int>();
 
+            // Defines Which Cells Are On The Last Column
             for (int i = 0; i < rows; i++)
             {
-                int spaceAdded = columns * (i + 1);
-                endSpaces.Add(spaceAdded);
+                int cellAdded = columns * (i + 1);
+                endCells.Add(cellAdded);
             }
 
             // For Every Row
@@ -105,30 +123,32 @@ namespace Projeto2aEpoca
 
                         switch (j)
                         {
+                            // First Line (Top Cell Limitation)
                             case 0:
                                 Console.Write("+-------------");
 
-                                foreach (int endSpace in endSpaces)
+                                foreach (int endCell in endCells)
                                 {
-                                    if (cell == endSpace)
+                                    if (cell == endCell)
                                     {
                                         Console.Write("+");
                                     }
                                 }
                                 break;
 
+                            // Empty Line
                             case 1:
                                 Console.Write($"|             ");
 
-                                foreach (int endSpace in endSpaces)
+                                foreach (int endCell in endCells)
                                 {
-                                    if (cell == endSpace)
+                                    if (cell == endCell)
                                     {
                                         Console.Write("|");
                                     }
                                 }
                                 break;
-                            
+
                             // Cell Details (1)
                             case 2:
                                 // "Unexplored"
@@ -160,9 +180,9 @@ namespace Projeto2aEpoca
                                     Console.Write("    ");
                                 }
 
-                                foreach (int endSpace in endSpaces)
+                                foreach (int endCell in endCells)
                                 {
-                                    if (cell == endSpace)
+                                    if (cell == endCell)
                                     {
                                         Console.Write("|");
                                     }
@@ -200,21 +220,22 @@ namespace Projeto2aEpoca
                                     Console.Write("    ");
                                 }
 
-                                foreach (int endSpace in endSpaces)
+                                foreach (int endCell in endCells)
                                 {
-                                    if (cell == endSpace)
+                                    if (cell == endCell)
                                     {
                                         Console.Write("|");
                                     }
                                 }
                                 break;
 
+                            // Empty Line
                             case 4:
                                 Console.Write("|             ");
 
-                                foreach (int endSpace in endSpaces)
+                                foreach (int endCell in endCells)
                                 {
-                                    if (cell == endSpace)
+                                    if (cell == endCell)
                                     {
                                         Console.Write("|");
                                     }
@@ -232,26 +253,36 @@ namespace Projeto2aEpoca
             }
             Console.Write("\n\n");
         }
-        
+
+        /// <summary>
+        /// Displays The Main Menu Options
+        /// </summary>
         public void MainMenu()
         {
-            Console.WriteLine("1. New Game    \n" + 
+            Console.WriteLine("1. New Game    \n" +
                               "2. High Scores \n" +
-                              "3. Credits     \n" + 
+                              "3. Credits     \n" +
                               "4. Quit        \n");
         }
 
+        /// <summary>
+        /// Reads Correct HighScores File And Displays It's Values
+        /// </summary>
+        /// <param name="board">Board To Use Defined Rows And Columns</param>
         public void HighScores(Board board)
         {
+            // Sets fileName And Separator So The File Can Be Read
             string fileName = $"HighScores_{board.Rows}x{board.Columns}.txt";
             char separator = '\t';
 
+            // Opens File As A StreamReader
             StreamReader sr = new StreamReader(fileName);
             string s;
 
             Console.WriteLine($"+++++++++ {board.Rows}x{board.Columns} " +
                               $"HighScores +++++++++\n");
 
+            // loops Through Each Line Of The File And Displays The Scores
             while ((s = sr.ReadLine()) != null)
             {
                 string[] nameAndScore = s.Split(separator);
@@ -262,9 +293,13 @@ namespace Projeto2aEpoca
 
             Console.WriteLine("\n\nPress any key to return");
 
+            // Closes the File So It can Be Used In Other Methods
             sr.Close();
         }
 
+        /// <summary>
+        /// Displays Credits
+        /// </summary>
         public void Credits()
         {
             Console.WriteLine("This program was made by:\n\n" +
@@ -275,6 +310,10 @@ namespace Projeto2aEpoca
             Console.WriteLine("Press any key to return");
         }
 
+        /// <summary>
+        /// Displays 'QuitGame' Message and Leaves Game
+        /// If The Player Really Wants To Quit
+        /// </summary>
         public void QuitGame()
         {
             string option = "";
@@ -299,8 +338,15 @@ namespace Projeto2aEpoca
             }
         }
 
-        public void HowToUse()
+        /// <summary>
+        /// Displays 'HowToUse' Message If User
+        /// Inputs An Invalid Argument
+        /// /// </summary>
+        /// <param name="argument">Argument That Was Invalid</param>
+        public void HowToUse(string argument)
         {
+            Console.WriteLine($"Invalid value for {argument}.\n\n");
+
             Console.WriteLine("Here's an example of how to use the arguments:" +
                 "\n\tdotnet run -- -r 7 -c 8 -d 5\n" +
                 "\t-r represents the number of rows in the board" +

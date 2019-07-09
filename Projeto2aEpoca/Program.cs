@@ -6,17 +6,17 @@ namespace Projeto2aEpoca
     class Program
     {
         /// <summary>
-        /// Contains main method. Runs program and takes arguments given in 
-        /// console
+        /// Main Method That Runs Program And
+        /// Takes Arguments Given In The Console
         /// </summary>
-        /// <param name="args"></param>
-
+        /// <param name="args">Arguments Given In The Console</param>
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
 
-
+            // Creates An Instance Of 'Renderer' And 'Player'
             Renderer renderer = new Renderer();
+            Player player = new Player();
 
 
             // Instance Variables
@@ -31,24 +31,25 @@ namespace Projeto2aEpoca
                 switch (args[i])
                 {
                     case "-r":
+                        // Checks If It's An Int, Leaves Program If It Isn't
                         if (int.TryParse(args[i + 1], out rows)) break;
                         else
                         {
-                            Console.WriteLine("Invalid value for ROWS.\n\n");
-                            renderer.HowToUse();
+                            renderer.HowToUse("ROWS");
                             return;
                         }
 
                     case "-c":
+                        // Checks If It's An Int, Leaves Program If It Isn't
                         if (int.TryParse(args[i + 1], out columns)) break;
                         else
                         {
-                            Console.WriteLine("Invalid value for COLUMNS.\n\n");
-                            renderer.HowToUse();
+                            renderer.HowToUse("COLUMN");
                             return;
                         }
 
                     case "-d":
+                        // Checks If It's An Int, Leaves Program If It Isn't
                         if (int.TryParse(args[i + 1], out difficulty))
                         {
                             if (difficulty > 10) difficulty = 10;
@@ -57,8 +58,7 @@ namespace Projeto2aEpoca
                         }
                         else
                         {
-                            Console.WriteLine("Invalid value for DIFFICULTY.\n\n");
-                            renderer.HowToUse();
+                            renderer.HowToUse("DIFFICULTY");
                             return;
                         }
 
@@ -67,12 +67,12 @@ namespace Projeto2aEpoca
                 }
             }
 
-
+            // Creates An Instance Of 'Board', 'Level' And 'Game'
             Board board = new Board(rows, columns, difficulty);
-            Player player = new Player(0, 0);
             Level level = new Level(board, player);
             Game game = new Game(board, renderer, level, player);
 
+            // Runs The Game Loop
             game.MainLoop();
         }
     }

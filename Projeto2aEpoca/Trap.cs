@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Projeto2aEpoca
 {
     public class Trap
     {
         /// <summary>
-        /// Saves all the information about all traps
+        /// Instance Variables
         /// </summary>
-        
-        // Instance Variables
         public int Row;
         public int Column;
         public int maxDamage;
@@ -20,8 +16,13 @@ namespace Projeto2aEpoca
         public bool fallenInto { get; private set; }
 
         private static Random random = new Random();
-        
-        // Constructor Method 
+
+        /// <summary>
+        /// Creates An Instance Of 'Trap'
+        /// </summary>
+        /// <param name="type">Sets The Type Of The Trap</param>
+        /// <param name="row">Sets The Row Of The Trap</param>
+        /// <param name="column">Sets The Column Of The Trap</param>
         public Trap(TrapTypes type, int row, int column)
         {
             Type = type;
@@ -33,12 +34,14 @@ namespace Projeto2aEpoca
             fallenInto = false;
         }
 
+        /// <summary>
+        /// Sets DamageDealt (0 to maxDamage) and Sets Trap Activation Message
+        /// </summary>
+        /// <param name="player">
+        /// Player That Will Take Damage Form The Trap</param>
+        /// <returns>Returns The Trap Message</returns>
         public string dealDamage(Player player)
         {
-            /// <summary>
-            /// Sets DamageDealt (0 to maxDamage) and Shows Activation Message
-            /// </summary>
-
             Random random = new Random();
 
             double damage = random.NextDouble() * maxDamage;
