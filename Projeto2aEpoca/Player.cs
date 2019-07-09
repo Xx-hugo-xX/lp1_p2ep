@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Projeto2aEpoca
 {
-    public class Player : Character
+    public class Player
     {
         /// <summary>
         /// Player's Movement
@@ -12,15 +12,19 @@ namespace Projeto2aEpoca
 
         // Instance Variables
         public double hp;
+        public float score;
         public bool hasMoved;
         public Position playerPosition;
         public bool hasMap;
+        public int enemiesKilled;
 
         // Constructor Method
         public Player(int row, int column)
         {
             playerPosition = new Position(row, column);
             hp = 100.0f;
+            score = 0.0f;
+            enemiesKilled = 0;
         }
 
         public void Move(string direction, Board board)
@@ -176,7 +180,7 @@ namespace Projeto2aEpoca
 
             Console.Clear();
             Console.WriteLine("Your HP Reached 0. You Lost.");
-            Environment.Exit(0);
+            Console.ReadLine();
         }
     }
 }

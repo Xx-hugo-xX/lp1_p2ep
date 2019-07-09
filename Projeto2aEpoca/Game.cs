@@ -1,35 +1,153 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.IO;
 
 namespace Projeto2aEpoca
 {
-    class GameLoop
+    class Game
     {
         /// <summary>
-        /// Contains the method PlayGame and runs the game loop. 
+        /// Contains the method MainLoop and runs the game loop, creates a
+        /// game instance and handles the highscores
         /// </summary>
-        
-        
+
+
         // Instance Variables
         Board Board;
         Renderer Renderer;
         Level Level;
         Player Player;
-        bool playing = false;
+
+
+
+        string fileName;
+        char separator;
+        List<HighScore> scoreList;
+
 
         // Constructor Method
-        public GameLoop(
+        public Game(
             Board board, Renderer renderer, Level level, Player player)
         {
             Board = board;
             Renderer = renderer;
             Level = level;
             Player = player;
+
+            fileName = $"HighScores_{Board.Rows}x{Board.Columns}.txt";
+            separator = '\t';
         }
 
-        public void PlayGame()
+
+        public void CreateHighScores()
         {
+            scoreList = new List<HighScore>();
+            if (!File.Exists(fileName))
+            {
+                using (StreamWriter sw = File.CreateText(fileName))
+                {
+                }
+            }
+
+            StreamReader sr = new StreamReader(fileName);
+            char separator = '\t';
+
+            string s;
+            while ((s = sr.ReadLine()) != null)
+            {
+                string[] nameAndScore = s.Split(separator);
+                string name = nameAndScore[0];
+                float score = Convert.ToSingle(nameAndScore[1]);
+                scoreList.Add(new HighScore(name, score));
+            }
+            sr.Close();
+        }
+
+        public void AddScore()
+        {
+            string name;
+            if (scoreList.Count < 8)
+            {
+                Console.Clear();
+                Console.WriteLine("New HighScore! What should we call you?\n");
+                name = Console.ReadLine() + "          ";
+                name = name.Substring(0, 10);
+
+                Console.WriteLine($"\nYour score of {Player.score} was added to the {Board.Rows}x{Board.Columns} board HighScores!");
+
+                scoreList.Add(new HighScore(name, Player.score));
+                SortHighScores();
+            }
+
+            else
+            {
+                bool isHigher = false;
+                for (int i = 0; i < scoreList.Count; i++)
+                {
+                    if (Player.score > scoreList[i].Score)
+                    {
+                        isHigher = true;
+                    }
+                }
+                if (isHigher)
+                {
+                    Console.Clear();
+                    Console.WriteLine("New HighScore! What should we call you?\n");
+                    name = Console.ReadLine() + "          ";
+                    name = name.Substring(0, 10);
+
+                    Console.WriteLine($"\nYour score of {Player.score} was added to the {Board.Rows}x{Board.Columns} board HighScores!");
+
+                    scoreList.Add(new HighScore(name, Player.score));
+
+                    SortHighScores();
+                }
+            }
+        }
+
+
+        public void SortHighScores()
+        {
+            scoreList.Sort(new ScoreComparer());
+
+            if (scoreList.Count > 8)
+            {
+                scoreList.RemoveAt(8);
+            }
+        }
+
+
+        public void SaveHighScores()
+        {
+            StreamWriter sw = new StreamWriter(fileName);
+
+            foreach (HighScore hs in scoreList)
+            {
+                sw.WriteLine(hs.Name + separator + hs.Score);
+            }
+            sw.Close();
+        }
+
+
+        public void HighScoreManagement()
+        {
+            AddScore();
+            SortHighScores();
+            SaveHighScores();
+        }
+
+
+        public void MainLoop()
+        {
+            CreateHighScores();
+
+
+            // Instance Variables
+            bool playing = false;
+            Player.hp = 100.0f;
+            Player.score = 0.0f;
+            Level.currentLevel = 1;
+
             while (!playing)
             {
                 Console.Clear();
@@ -44,7 +162,7 @@ namespace Projeto2aEpoca
                 }
                 else if (option == "2")
                 {
-                    Renderer.HighScores();
+                    Renderer.HighScores(Board);
                     Console.ReadLine();
                 }
                 else if (option == "3")
@@ -73,6 +191,8 @@ namespace Projeto2aEpoca
                 while (!finishedLevel)
                 {
                     madeTurn = false;
+                    Player.score = (1 + 0.4f * Board.Difficulty)
+                        * ((Level.currentLevel - 1) + 0.1f * Player.enemiesKilled);
 
                     // Restart Messages For New Turn
                     m1 = "";
@@ -99,13 +219,16 @@ namespace Projeto2aEpoca
                     if (Player.hp <= 0.0f)
                     {
                         Player.PlayerDeath();
+                        HighScoreManagement();
+                        Console.ReadLine();
+                        MainLoop();
                     }
 
                     foreach (Cell cell in Board.cellList)
                     {
                         cell.CheckOccupants(Player, Level);
                     }
-                    
+
                     // Renderer
                     Renderer.ShowGameValues(Board, Level);
                     Renderer.ShowPlayerStats(Player);
@@ -166,6 +289,9 @@ namespace Projeto2aEpoca
                     if (Player.hp <= 0.0f)
                     {
                         Player.PlayerDeath();
+                        HighScoreManagement();
+                        Console.ReadLine();
+                        MainLoop();
                     }
 
                     Console.Clear();

@@ -14,21 +14,7 @@ namespace Projeto2aEpoca
         public int cellRow, cellColumn;
         public bool hasBeenExplored { get; set; }
 
-        public List<occupantType> occupantList = new List<occupantType>();
-
-
-        // Possible Cell Occupants
-        public enum occupantType
-        {
-            empty  = '.',
-            player = '\u0398',
-            enemy  = '\u03A8',
-            food   = '\u03A9',
-            weapon = '\u03EF',
-            trap   = '\u0416',
-            map    = '\u0524',
-            exit
-        };
+        public List<OccupantTypes> occupantList = new List<OccupantTypes>();
 
         // Constructor Method
         public Cell(int row, int column)
@@ -55,7 +41,7 @@ namespace Projeto2aEpoca
             if (player.playerPosition.Row == cellRow &&
                 player.playerPosition.Column == cellColumn)
             {
-                occupantList.Add(occupantType.player);
+                occupantList.Add(OccupantTypes.player);
                 occupants++;
                 hasBeenExplored = true;
             }
@@ -64,7 +50,7 @@ namespace Projeto2aEpoca
             if (!player.hasMap && level.map.Row == cellRow &&
                 level.map.Column == cellColumn)
             {
-                occupantList.Add(occupantType.map);
+                occupantList.Add(OccupantTypes.map);
                 occupants++;
             }
 
@@ -74,14 +60,14 @@ namespace Projeto2aEpoca
                 if (trap.Row == cellRow && trap.Column == cellColumn &&
                     !trap.fallenInto)
                 {
-                    occupantList.Add(occupantType.trap);
+                    occupantList.Add(OccupantTypes.trap);
                     occupants++;
                 }
             }
 
             for (int i = 0; i < (10 - occupants); i++)
             {
-                occupantList.Add(occupantType.empty);
+                occupantList.Add(OccupantTypes.empty);
             }
         }
     }

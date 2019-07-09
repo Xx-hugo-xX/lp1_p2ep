@@ -15,6 +15,10 @@ namespace Projeto2aEpoca
         {
             Console.OutputEncoding = Encoding.UTF8;
 
+
+            Renderer renderer = new Renderer();
+
+
             // Instance Variables
             int rows = 0;
             int columns = 0;
@@ -27,29 +31,49 @@ namespace Projeto2aEpoca
                 switch (args[i])
                 {
                     case "-r":
-                        rows = Convert.ToInt32(args[i+1]);
-                        break;
+                        if (int.TryParse(args[i + 1], out rows)) break;
+                        else
+                        {
+                            Console.WriteLine("Invalid value for ROWS.\n\n");
+                            renderer.HowToUse();
+                            return;
+                        }
 
                     case "-c":
-                        columns = Convert.ToInt32(args[i + 1]);
-                        break;
+                        if (int.TryParse(args[i + 1], out columns)) break;
+                        else
+                        {
+                            Console.WriteLine("Invalid value for COLUMNS.\n\n");
+                            renderer.HowToUse();
+                            return;
+                        }
+
                     case "-d":
-                        difficulty = Convert.ToInt32(args[i + 1]);
-                        if (difficulty > 10) difficulty = 10;
-                        break;
+                        if (int.TryParse(args[i + 1], out difficulty))
+                        {
+                            if (difficulty > 10) difficulty = 10;
+                            if (difficulty < 1) difficulty = 1;
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid value for DIFFICULTY.\n\n");
+                            renderer.HowToUse();
+                            return;
+                        }
+
                     default:
                         break;
                 }
             }
 
 
-            Renderer renderer = new Renderer();
             Board board = new Board(rows, columns, difficulty);
             Player player = new Player(0, 0);
             Level level = new Level(board, player);
-            GameLoop gameLoop = new GameLoop(board, renderer, level, player);
+            Game game = new Game(board, renderer, level, player);
 
-            gameLoop.PlayGame();
+            game.MainLoop();
         }
     }
 }
