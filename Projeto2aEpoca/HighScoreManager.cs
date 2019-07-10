@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Projeto2aEpoca
 {
-    class HighScoreManager
+    public class HighScoreManager
     {
         string fileName;
         char separator;
