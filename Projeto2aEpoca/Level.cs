@@ -33,7 +33,6 @@ namespace Projeto2aEpoca
 
         List<Cell> CellList;
         Board Board;
-        Game Game;
         Player Player;
         PossibleItems PossibleItems;
 
