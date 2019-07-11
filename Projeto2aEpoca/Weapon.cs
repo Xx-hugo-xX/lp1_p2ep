@@ -1,5 +1,8 @@
 ﻿namespace Projeto2aEpoca
 {
+    /// <summary>
+    /// Sets weapon properties
+    /// </summary>
     public class Weapon : Item
     {
         /// <summary>

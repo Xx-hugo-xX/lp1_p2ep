@@ -2,12 +2,13 @@
 
 namespace Projeto2aEpoca
 {
+    /// <summary>
+    /// Compare Method For The Comparer Interface, That Defines
+    /// How Two HighScores Should Be Compared
+    /// </summary>
+    
     class ScoreComparer : IComparer<HighScore>
     {
-        /// <summary>
-        /// Compare Method For The Comparer Interface, That Defines
-        /// How Two HighScores Should Be Compared
-        /// </summary>
         /// <param name="highScore1">
         /// First HighScore To Be Compared With The Second</param>
         /// <param name="highScore2">

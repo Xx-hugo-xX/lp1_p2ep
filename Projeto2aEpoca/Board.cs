@@ -2,6 +2,10 @@
 
 namespace Projeto2aEpoca
 {
+    /// <summary>
+    /// Creats the game board
+    /// </summary>
+
     public class Board
     {
         /// <summary>

@@ -1,5 +1,8 @@
 ﻿namespace Projeto2aEpoca
 {
+    /// <summary>
+    /// Creates HighScore details
+    /// </summary>
     public struct HighScore
     {
         /// <summary>

@@ -5,6 +5,11 @@ using System.IO;
 
 namespace Projeto2aEpoca
 {
+    /// <summary>
+    /// Contains all the functions to draw the map, menus, and the 
+    /// text during the game.
+    /// </summary>
+    
     public class Renderer
     {
         /// <summary>

@@ -2,6 +2,10 @@
 
 namespace Projeto2aEpoca
 {
+    /// <summary>
+    /// Contains the method MainLoop and runs the game loop. 
+    /// </summary>
+    
     public class Game
     {
         /// <summary>

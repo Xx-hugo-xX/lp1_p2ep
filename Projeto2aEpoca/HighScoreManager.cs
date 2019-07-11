@@ -4,6 +4,10 @@ using System.IO;
 
 namespace Projeto2aEpoca
 {
+    /// <summary>
+    /// Manages HighScores
+    /// </summary>
+    
     public class HighScoreManager
     {
         string fileName;

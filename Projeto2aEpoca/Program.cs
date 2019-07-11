@@ -3,12 +3,13 @@ using System.Text;
 
 namespace Projeto2aEpoca
 {
+    /// <summary>
+    /// Main Method That Runs Program And
+    /// Takes Arguments Given In The Console
+    /// </summary>
+    
     class Program
     {
-        /// <summary>
-        /// Main Method That Runs Program And
-        /// Takes Arguments Given In The Console
-        /// </summary>
         /// <param name="args">Arguments Given In The Console</param>
         static void Main(string[] args)
         {
