@@ -41,7 +41,8 @@ namespace Projeto2aEpoca
             Console.WriteLine("Player Stats");
             Console.WriteLine("------------");
             Console.WriteLine($"\nHP: {player.hp.ToString("0.0")}\t" +
-                              $"Score: {player.score.ToString("0.0")}\n");
+                              $"Score: {player.score.ToString("0.0")}\t" +
+                              $"Inventory: {player.getInventoryWeight.ToString("0.0")}% full\n");
         }
 
         /// <summary>
@@ -69,6 +70,47 @@ namespace Projeto2aEpoca
                 "(L) Look Around    (H) Help             . - Empty");
             Console.WriteLine(
                 "(S) Save Game      (Q) Quit Game        ~ - Unexplored");
+        }
+
+        /// <summary>
+        /// Displays All Weapons And Their Corresponding Values,
+        /// And Displays All Foods And Their Corresponding Values
+        /// </summary>
+        /// <param name="possibleItems">
+        /// Class That Contains The Arrays Of
+        /// All Possible Weapons And Food</param>
+        public void ShowHelp(PossibleItems possibleItems)
+        {
+            Console.Clear();
+
+            Console.WriteLine("Weapons");
+            Console.WriteLine("-------");
+            
+            // Loops Through List Of All Possible Weapons
+            // And Displays Their Values, One By One
+            for (int i = 0; i < possibleItems.weapons.Length; i++)
+            {
+                Console.Write($"Name: {possibleItems.weapons[i].Name}\t\t");
+                if (i == 0 || i == 1 || i == 4) Console.Write("\t");
+                Console.Write($"AttackPower: {possibleItems.weapons[i].AttackPower}\t\t");
+                Console.Write($"Weight: {possibleItems.weapons[i].Weight}\t\t");
+                Console.Write($"Durability: {possibleItems.weapons[i].Durability}\n");
+            }
+
+            Console.WriteLine("\nFood");
+            Console.WriteLine("----");
+
+            // Loops Through List Of All Possible Foods
+            // And Displays Their Values, One By One
+            for (int i = 0; i < possibleItems.foods.Length; i++)
+            {
+                Console.Write($"Name: {possibleItems.foods[i].Name}\t\t");
+                if (i == 1 || i == 3) Console.Write("\t");
+                Console.Write($"HPIncrease: {possibleItems.foods[i].HPIncrease}\t\t");
+                Console.Write($"Weight: {possibleItems.foods[i].Weight}\n");
+            }
+            Console.WriteLine("\n\nPress any key to return");
+            Console.ReadLine();
         }
 
         /// <summary>
@@ -119,7 +161,7 @@ namespace Projeto2aEpoca
                     for (int k = 0; k < columns; k++)
                     {
                         // Calculates Number Of Cell
-                        cell = i * columns + k + 1;
+                        cell = i * columns + k +1;
 
                         switch (j)
                         {
@@ -152,16 +194,16 @@ namespace Projeto2aEpoca
                             // Cell Details (1)
                             case 2:
                                 // "Unexplored"
-                                if (!board.cellList[cell - 1].hasBeenExplored)
+                                if (!board.cellList[cell-1].hasBeenExplored)
                                 {
                                     Console.Write("|    ~~~~~    ");
                                 }
 
                                 // "Exit"
                                 else if (
-                                    level.exit.Row == board.cellList[cell - 1]
+                                    level.exit.Row == board.cellList[cell-1]
                                     .cellRow && level.exit.Column ==
-                                    board.cellList[cell - 1].cellColumn)
+                                    board.cellList[cell -1].cellColumn)
                                 {
                                     Console.Write("|    EXIT!    ");
                                 }
@@ -174,7 +216,7 @@ namespace Projeto2aEpoca
                                     for (int l = 0; l < 5; l++)
                                     {
                                         Console.Write((char)board.
-                                            cellList[cell - 1].
+                                            cellList[cell-1].
                                             occupantList.ElementAt(l));
                                     }
                                     Console.Write("    ");
@@ -199,7 +241,7 @@ namespace Projeto2aEpoca
 
                                 // "Exit"
                                 else if (
-                                    level.exit.Row == board.cellList[cell - 1]
+                                    level.exit.Row == board.cellList[cell -1]
                                     .cellRow && level.exit.Column ==
                                     board.cellList[cell - 1].cellColumn)
                                 {
