@@ -4,8 +4,17 @@ using System.Text;
 
 namespace Projeto2aEpoca
 {
-    // Not Necessary For "Fase 04"
     public class Item
     {
+        /// <summary>
+        /// Instance Variables
+        /// </summary>
+        public string Name;
+        public float Weight;
+        public Position Position;
+
+        public bool isWeapon;
+
+        public bool TakenByPlayer;
     }
 }
