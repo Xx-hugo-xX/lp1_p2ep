@@ -2,6 +2,10 @@
 
 namespace Projeto2aEpoca
 {
+    /// <summary>
+    /// Has the DealDamge function and the overall trap characteristics
+    /// </summary>
+    
     public class Trap
     {
         /// <summary>

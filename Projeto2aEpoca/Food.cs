@@ -1,5 +1,9 @@
 ﻿namespace Projeto2aEpoca
 {
+    /// <summary>
+    /// Sets food properties
+    /// </summary>
+    
     public class Food : Item
     {
         /// <summary>

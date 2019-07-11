@@ -2,6 +2,10 @@
 
 namespace Projeto2aEpoca
 {
+    /// <summary>
+    /// Saves the information about each cell
+    /// </summary>
+    
     public class Cell
     {
         /// <summary>

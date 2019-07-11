@@ -1,5 +1,8 @@
 ﻿namespace Projeto2aEpoca
 {
+    /// <summary>
+    /// Dictates items names and stats
+    /// </summary>
     public class PossibleItems
     {
         public enum weaponTypes

@@ -3,6 +3,12 @@ using System.Collections.Generic;
 
 namespace Projeto2aEpoca
 {
+
+    /// <summary>
+    /// Creates new levels, and the positions of the player, exit, map
+    /// and traps
+    /// </summary>
+    
     public class Level
     {
         /// <summary>

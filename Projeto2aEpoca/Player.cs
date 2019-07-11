@@ -4,6 +4,10 @@ using System.Linq;
 
 namespace Projeto2aEpoca
 {
+    /// <summary>
+    /// Player's Movement, and Look Around
+    /// </summary>
+    
     public class Player
     {
         /// <summary>

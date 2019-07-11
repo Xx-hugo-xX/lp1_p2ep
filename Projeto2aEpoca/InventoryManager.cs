@@ -3,6 +3,11 @@ using System.Linq;
 
 namespace Projeto2aEpoca
 {
+    /// <summary>
+    /// As PickUpWeapon, PickUpFood  and DropItem fuctions that allow the 
+    /// player to manage which items the player as in the inventory  
+    /// </summary>
+    
     public class InventoryManager
     {
         /// <summary>
