@@ -68,8 +68,7 @@ namespace Projeto2aEpoca
                 }
             }
 
-            // Creates An Instance Of 'Board', 'Level', HighScoreManager
-            // And 'Game'
+            // Creates An Instance Of 'Board', 'Level' And 'Game'
             Board board = new Board(rows, columns, difficulty);
             Level level = new Level(board, player, possibleItems);
             HighScoreManager highScoreManager =

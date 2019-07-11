@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Projeto2aEpoca
 {
@@ -13,6 +12,8 @@ namespace Projeto2aEpoca
         Level Level;
         Player Player;
         HighScoreManager HighScoreManager;
+        InventoryManager InventoryManager;
+        PossibleItems PossibleItems;
 
         /// <summary>
         /// Creates An Instance Of 'Game'
@@ -30,6 +31,8 @@ namespace Projeto2aEpoca
             Level = level;
             Player = player;
             HighScoreManager = highScoreManager;
+            InventoryManager = new InventoryManager(Player, Level);
+            PossibleItems = new PossibleItems();
         }
 
         /// <summary>
@@ -88,20 +91,16 @@ namespace Projeto2aEpoca
                 bool madeTurn = false;
 
                 // Messages To Be Rendered
-                string m1;
-                string m2;
-                string m3;
+                string m1 = "";
+                string m2 = "";
+                string m3 = "";
 
                 while (!finishedLevel)
                 {
                     madeTurn = false;
                     Player.score = (1 + 0.4f * Board.Difficulty)
-                        * ((Level.currentLevel - 1) + 0.1f * Player.enemiesKilled);
-
-                    // Restart Messages For New Turn
-                    m1 = "";
-                    m2 = "";
-                    m3 = "";
+                        * ((Level.currentLevel - 1) + 0.1f * 
+                        Player.enemiesKilled);
 
                     foreach (Trap trap in Level.trapList)
                     {
@@ -140,40 +139,100 @@ namespace Projeto2aEpoca
                     Renderer.ShowMessage(m1, m2, m3);
                     Renderer.ShowLegend();
 
-                    string moveOption = Console.ReadLine();
+                    // Restart Messages For New Turn
+                    m1 = "";
+                    m2 = "";
+                    m3 = "";
+
+                    string turnOption = Console.ReadLine();
 
                     // "Move"
-                    if (moveOption == "1" || moveOption == "2" ||
-                        moveOption == "3" || moveOption == "4" ||
-                        moveOption == "5" || moveOption == "6" ||
-                        moveOption == "7" || moveOption == "8" ||
-                        moveOption == "9")
+                    if (turnOption == "1" || turnOption == "2" ||
+                        turnOption == "3" || turnOption == "4" ||
+                        turnOption == "5" || turnOption == "6" ||
+                        turnOption == "7" || turnOption == "8" ||
+                        turnOption == "9")
                     {
-                        Player.Move(moveOption, Board);
+                        Player.Move(turnOption, Board);
                         madeTurn = Player.hasMoved;
                     }
 
                     // "Look Around"
-                    else if (moveOption == "L")
+                    else if (turnOption == "L")
                     {
                         Player.LookAround(Board);
-                        madeTurn = true;
                     }
 
-                    // "Pick_Up Map"
-                    else if (moveOption == "E")
+                    // "Pick_Up Item"
+                    else if (turnOption == "E")
                     {
-                        if (Player.position.Row == Level.map.Row &&
-                            Player.position.Column == Level.map.Column)
+                        string itemDesired;
+
+                        Console.WriteLine("What do you want to pick up?");
+                        Console.WriteLine("1. Map\n" +
+                                          "2. Weapon\n" +
+                                          "3. Food\n");
+                        itemDesired = Console.ReadLine();
+
+                        switch (itemDesired)
                         {
-                            Player.hasMap = true;
-                            Board.exploreAllCells();
-                            madeTurn = true;
+                            // "Map"
+                            case "1":
+                                if (Player.position.Row == Level.map.Row &&
+                                    Player.position.Column == Level.map.Column)
+                                {
+                                    Player.hasMap = true;
+                                    Board.exploreAllCells();
+                                    madeTurn = true;
+                                }
+                                else m1 = "No map found.";
+                                break;
+
+                            // "Weapon"
+                            case "2":
+                                m1 = InventoryManager.PickUpWeapon();
+                                madeTurn = true;
+                                break;
+
+                            // "Food"
+                            case "3":
+                                m1 = InventoryManager.PickUpFood();
+                                madeTurn = true;
+                                break;
+
+                            default:
+                                m1 = "Invalid option.";
+                                break;
                         }
                     }
 
+                    // "Drop Item"
+                    else if (turnOption == "D")
+                    {
+                        m1 = InventoryManager.DropItem();
+                    }
+
+                    // "Help"
+                    else if (turnOption == "H")
+                    {
+                        Renderer.ShowHelp(PossibleItems);
+                    }
+
+                    // Get Map Cheat
+                    else if (turnOption == "GIMMETHIRDEYE")
+                    {
+                        Player.hasMap = true;
+                        Board.exploreAllCells();
+                    }
+
+                    // Restore Health Cheat
+                    else if (turnOption == "HEALME")
+                    {
+                        Player.hp = 100;
+                    }
+
                     // "QuitGame"
-                    else if (moveOption == "Q")
+                    else if (turnOption == "Q")
                     {
                         Renderer.QuitGame();
                     }

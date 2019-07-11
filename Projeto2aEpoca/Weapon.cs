@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Projeto2aEpoca
+﻿namespace Projeto2aEpoca
 {
     public class Weapon : Item
     {
@@ -21,7 +17,8 @@ namespace Projeto2aEpoca
         /// Probability Of The Weapon Breaking After Attack</param>
         /// <param name="weight">
         /// Weight Of The Weapon On The Player's Inventory</param>
-        public Weapon(string name, float attackPower, float durability, float weight)
+        public Weapon(
+            string name, float attackPower, float durability, float weight)
         {
             Name = name;
             AttackPower = attackPower;

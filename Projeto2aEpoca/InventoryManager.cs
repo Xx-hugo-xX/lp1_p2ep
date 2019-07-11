@@ -77,7 +77,8 @@ namespace Projeto2aEpoca
 
                     else if (!Level.weaponList.ElementAt(i).TakenByPlayer)
                         Console.WriteLine($"{i + 1}. " +
-            $"{Level.weaponList.ElementAt(i).Name} (Weapon Is Somewhere Else)");
+                                    $"{Level.weaponList.ElementAt(i).Name} " +
+                                    $"(Weapon Is Somewhere Else)");
                 }
 
                 // Reads Which Weapon The User Wants To Pick Up
@@ -103,19 +104,19 @@ namespace Projeto2aEpoca
                        (Convert.ToInt32(wantedWeapon) - 1).Weight > 100)
                         {
                             pickupMessage = "You're already carrying too " +
-                                        "much weight. Maybe drop another item" +
-                                        " to make some space.";
+                                       "much weight. Maybe drop another item" +
+                                       " to make some space.";
                         }
                         else
                         {
                             pickupMessage = $"You got the weapon: " +
-           $"{Level.weaponList.ElementAt(Convert.ToInt32(wantedWeapon) - 1).Name}";
+       $"{Level.weaponList.ElementAt(Convert.ToInt32(wantedWeapon) - 1).Name}";
 
                             Player.inventory.Add(Level.weaponList.ElementAt
-                                                (Convert.ToInt32(wantedWeapon) - 1));
+                                          (Convert.ToInt32(wantedWeapon) - 1));
 
-                            Level.weaponList.ElementAt
-                           (Convert.ToInt32(wantedWeapon) - 1).TakenByPlayer = true;
+                            Level.weaponList.ElementAt(Convert.ToInt32
+                                (wantedWeapon) - 1).TakenByPlayer = true;
 
                             Level.weaponList.Remove(
                 Level.weaponList.ElementAt(Convert.ToInt32(wantedWeapon) - 1));
@@ -167,14 +168,12 @@ namespace Projeto2aEpoca
             else
             {
                 string wantedFood;
-
-
+                
                 // Gives User a List Of All The Foods In The Map,
                 //And Tells Him/Her Wich Of The Foods Are In His Position
                 Console.WriteLine("\nWhat food do you want to get?\n");
                 for (int i = 0; i < Level.foodList.Count; i++)
                 {
-
                     if (Player.position.Row == Level.foodList.
                                                ElementAt(i).Position.Row &&
                         Player.position.Column == Level.foodList.
@@ -184,8 +183,7 @@ namespace Projeto2aEpoca
                         Console.WriteLine($"{i + 1}. " +
                     $"{Level.foodList.ElementAt(i).Name} (Food In Sight)");
                     }
-
-
+                    
                     else if (!Level.foodList.ElementAt(i).TakenByPlayer)
                         Console.WriteLine($"{i + 1}. " +
             $"{Level.foodList.ElementAt(i).Name} (Food Is Somewhere Else)");
@@ -210,8 +208,8 @@ namespace Projeto2aEpoca
                        (Convert.ToInt32(wantedFood) - 1).TakenByPlayer)
                     {
                         // See If The Player Can Carry More Items
-                        if (Player.getInventoryWeight + Level.foodList.ElementAt
-                       (Convert.ToInt32(wantedFood) - 1).Weight > 100)
+                        if (Player.getInventoryWeight + Level.foodList.
+                       ElementAt(Convert.ToInt32(wantedFood) - 1).Weight > 100)
                         {
                             pickupMessage = "You're already carrying too " +
                                         "much weight. Maybe drop another item" +
@@ -220,16 +218,18 @@ namespace Projeto2aEpoca
                         else
                         {
                             pickupMessage = $"You got the food: " +
-               $"{Level.foodList.ElementAt(Convert.ToInt32(wantedFood) - 1).Name}";
+           $"{Level.foodList.ElementAt(Convert.ToInt32(wantedFood) - 1).Name}";
 
-                            Player.inventory.Add(Level.foodList.ElementAt
-                                                (Convert.ToInt32(wantedFood) - 1));
+                            Player.inventory.Add(Level.foodList.
+                                ElementAt(Convert.ToInt32(wantedFood) - 1));
 
                             Level.foodList.ElementAt
-                           (Convert.ToInt32(wantedFood) - 1).TakenByPlayer = true;
+                           (Convert.ToInt32(wantedFood) - 1).
+                           TakenByPlayer = true;
 
                             Level.foodList.Remove(
-                     Level.foodList.ElementAt(Convert.ToInt32(wantedFood) - 1));
+                     Level.foodList.ElementAt(
+                         Convert.ToInt32(wantedFood) - 1));
                         }
                     }
 
@@ -273,14 +273,13 @@ namespace Projeto2aEpoca
                 Console.WriteLine("\nWhat item do you want to drop?\n");
                 for (int i = 0; i < Player.inventory.Count; i++)
                 {
-                    Console.WriteLine($"{i + 1}. {Player.inventory.ElementAt(i).Name}");
+                    Console.WriteLine($"{i + 1}. " +
+                        $"{Player.inventory.ElementAt(i).Name}");
                 }
 
                 // Reads Which Item The User Wants To Drop
                 droppedItem = Console.ReadLine();
-
-
-
+                
                 // If The Input Is Valid, Sets Message To Be Displayed,
                 // Sets The Item's Position As The Current Player's Position,
                 // Sets The Item's State As Not Taken
@@ -291,12 +290,14 @@ namespace Projeto2aEpoca
                     dropMessage = $"You dropped the item: " +
         $"{Player.inventory.ElementAt(Convert.ToInt32(droppedItem) - 1).Name}";
 
-                    // Checks Which Item It Is And Creates a Copy To Add To The Specific List
+                    // Checks Which Item It Is And Creates a Copy 
+                    // To Add To The Specific List
                     switch (Player.inventory.ElementAt
                           (Convert.ToInt32(droppedItem) - 1).Name)
                     {
                         case "LongClaw":
-                            droppedWeapon = new Weapon("LongClaw", 14, 0.8f, 6);
+                            droppedWeapon = new Weapon(
+                                "LongClaw", 14, 0.8f, 6);
                             break;
 
                         case "Ryno":
@@ -304,19 +305,23 @@ namespace Projeto2aEpoca
                             break;
 
                         case "Light Saber":
-                            droppedWeapon = new Weapon("Light Saber", 18, 0.9f, 5);
+                            droppedWeapon = new Weapon(
+                                "Light Saber", 18, 0.9f, 5);
                             break;
 
                         case "Blades Of Chaos":
-                            droppedWeapon = new Weapon("Blades Of Chaos", 20, 0.9f, 12);
+                            droppedWeapon = new Weapon(
+                                "Blades Of Chaos", 20, 0.9f, 12);
                             break;
 
                         case "Mjolnir":
-                            droppedWeapon = new Weapon("Mjolnir", 25, 0.6f, 30);
+                            droppedWeapon = new Weapon(
+                                "Mjolnir", 25, 0.6f, 30);
                             break;
 
                         case "Infinity Gauntlet":
-                            droppedWeapon = new Weapon("Infinity Gauntlet", 35, 0.4f, 10);
+                            droppedWeapon = new Weapon(
+                                "Infinity Gauntlet", 35, 0.4f, 10);
                             break;
 
                         case "Slice of Cheese":
@@ -336,7 +341,8 @@ namespace Projeto2aEpoca
                             break;
 
                         case "Bucket of Chicken":
-                            droppedFood = new Food("Bucket of Chicken", 15, 3.1f);
+                            droppedFood = new Food(
+                                "Bucket of Chicken", 15, 3.1f);
                             break;
 
                         default:
@@ -365,8 +371,8 @@ namespace Projeto2aEpoca
                     }
 
                     // Set Item's State as "NotTaken"
-                    Player.inventory.ElementAt(Convert.ToInt32(droppedItem) - 1).
-                                        TakenByPlayer = false;
+                    Player.inventory.ElementAt(Convert.ToInt32
+                        (droppedItem) - 1).TakenByPlayer = false;
 
                     // Remove Item From Inventory
                     Player.inventory.Remove(Player.inventory.ElementAt(
