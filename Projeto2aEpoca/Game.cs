@@ -106,8 +106,8 @@ namespace Projeto2aEpoca
                     foreach (Trap trap in Level.trapList)
                     {
                         // Displays Trap(s) Name/Damage Dealt If Activated
-                        if (Player.playerPosition.Row == trap.Row &&
-                            Player.playerPosition.Column == trap.Column)
+                        if (Player.position.Row == trap.Row &&
+                            Player.position.Column == trap.Column)
                         {
                             // Pushes Recent Messages To Top Of Render
                             if (!trap.fallenInto)
@@ -163,8 +163,8 @@ namespace Projeto2aEpoca
                     // "Pick_Up Map"
                     else if (moveOption == "E")
                     {
-                        if (Player.playerPosition.Row == Level.map.Row &&
-                            Player.playerPosition.Column == Level.map.Column)
+                        if (Player.position.Row == Level.map.Row &&
+                            Player.position.Column == Level.map.Column)
                         {
                             Player.hasMap = true;
                             Board.exploreAllCells();
@@ -179,8 +179,8 @@ namespace Projeto2aEpoca
                     }
 
                     // Begins Change To Next Level if Player's in 'EXIT' Cell
-                    if (Player.playerPosition.Row == Level.exit.Row &&
-                        Player.playerPosition.Column == Level.exit.Column)
+                    if (Player.position.Row == Level.exit.Row &&
+                        Player.position.Column == Level.exit.Column)
                     {
                         Level.NextLevel();
                         finishedLevel = true;

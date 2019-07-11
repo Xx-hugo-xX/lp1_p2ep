@@ -18,24 +18,32 @@ namespace Projeto2aEpoca
         public Position map;
 
         public List<Trap> trapList;
+        public List<Weapon> weaponList;
+        public List<Food> foodList;
 
         List<Cell> CellList;
         Board Board;
         Player Player;
+        PossibleItems PossibleItems;
 
         /// <summary>
         /// Creates An Instance of 'Level'
         /// </summary>
         /// <param name="board">Board To Use Defined Rows And Columns</param>
+        /// <param name="possibleItems">Items That Can Be In The Level</param>
         /// <param name="player">Player To Set It's Initial Position</param>
-        public Level(Board board, Player player)
+        public Level(Board board, Player player, PossibleItems possibleItems)
         {
             Board = board;
             Player = player;
+            PossibleItems = possibleItems;
+
             CellList = Board.cellList;
 
             numberOfCells = Board.Rows * Board.Columns;
             trapList = new List<Trap>();
+            weaponList = new List<Weapon>();
+            foodList = new List<Food>();
 
             currentLevel = 1;
         }
@@ -69,7 +77,7 @@ namespace Projeto2aEpoca
             Random random = new Random();
 
             // Sets Player's Beginning Position (Cell)
-            Player.playerPosition = new Position(random.Next(Board.Rows), 0);
+            Player.position = new Position(random.Next(Board.Rows), 0);
 
             // Sets Exit's Position (Cell)
             exit = new Position(random.Next(Board.Rows), Board.Columns - 1);
@@ -108,8 +116,8 @@ namespace Projeto2aEpoca
                     {
                         continue;
                     }
-                    else if (row == Player.playerPosition.Row &&
-                             column == Player.playerPosition.Column)
+                    else if (row == Player.position.Row &&
+                             column == Player.position.Column)
                     {
                         continue;
                     }

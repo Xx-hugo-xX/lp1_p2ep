@@ -43,8 +43,8 @@ namespace Projeto2aEpoca
             int occupants = 0;
 
             // Player
-            if (player.playerPosition.Row == cellRow &&
-                player.playerPosition.Column == cellColumn)
+            if (player.position.Row == cellRow &&
+                player.position.Column == cellColumn)
             {
                 occupantList.Add(OccupantTypes.player);
                 occupants++;
