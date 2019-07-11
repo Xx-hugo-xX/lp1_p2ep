@@ -17,6 +17,7 @@ namespace Projeto2aEpoca
             // Creates An Instance Of 'Renderer' And 'Player'
             Renderer renderer = new Renderer();
             Player player = new Player();
+            PossibleItems possibleItems = new PossibleItems();
 
 
             // Instance Variables
@@ -69,8 +70,12 @@ namespace Projeto2aEpoca
 
             // Creates An Instance Of 'Board', 'Level' And 'Game'
             Board board = new Board(rows, columns, difficulty);
-            Level level = new Level(board, player);
-            Game game = new Game(board, renderer, level, player);
+            Level level = new Level(board, player, possibleItems);
+            HighScoreManager highScoreManager =
+                                           new HighScoreManager(board, player);
+
+            Game game = new Game(board, renderer, level,
+                                 player, highScoreManager);
 
             // Runs The Game Loop
             game.MainLoop();

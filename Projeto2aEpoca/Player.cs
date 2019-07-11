@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Projeto2aEpoca
 {
@@ -10,19 +12,34 @@ namespace Projeto2aEpoca
         public double hp;
         public float score;
         public bool hasMoved;
-        public Position playerPosition;
+        public Position position;
         public bool hasMap;
         public int enemiesKilled;
+
+        public List<Item> inventory;
+        public float getInventoryWeight
+        {
+            get
+            {
+                float weight = 0;
+                for (int i = 0; i < inventory.Count; i++)
+                {
+                    weight += inventory.ElementAt(i).Weight;
+                }
+                return weight;
+            }
+        }
 
         /// <summary>
         /// Creates An Instance Of 'Player'
         /// </summary>
         public Player()
         {
-            playerPosition = new Position(0, 0);
+            position = new Position(0, 0);
             hp = 100.0f;
             score = 0.0f;
             enemiesKilled = 0;
+            inventory = new List<Item>();
         }
 
         /// <summary>
@@ -44,62 +61,62 @@ namespace Projeto2aEpoca
             switch (direction)
             {
                 case "1":                                                 // SW 
-                    wantedPosition.Row = playerPosition.Row + 1;
-                    wantedPosition.Column = playerPosition.Column - 1;
+                    wantedPosition.Row = position.Row + 1;
+                    wantedPosition.Column = position.Column - 1;
                     break;
 
                 case "2":                                                 //  S
-                    wantedPosition.Row = playerPosition.Row + 1;
-                    wantedPosition.Column = playerPosition.Column;
+                    wantedPosition.Row = position.Row + 1;
+                    wantedPosition.Column = position.Column;
                     break;
 
                 case "3":                                                 // SE
-                    wantedPosition.Row = playerPosition.Row + 1;
-                    wantedPosition.Column = playerPosition.Column + 1;
+                    wantedPosition.Row = position.Row + 1;
+                    wantedPosition.Column = position.Column + 1;
                     break;
 
                 case "4":                                                 //  W
-                    wantedPosition.Row = playerPosition.Row;
-                    wantedPosition.Column = playerPosition.Column - 1;
+                    wantedPosition.Row = position.Row;
+                    wantedPosition.Column = position.Column - 1;
                     break;
 
                 case "5":                                         // Same Place
-                    wantedPosition.Row = playerPosition.Row;
-                    wantedPosition.Column = playerPosition.Column;
+                    wantedPosition.Row = position.Row;
+                    wantedPosition.Column = position.Column;
                     break;
 
                 case "6":                                                 //  E
-                    wantedPosition.Row = playerPosition.Row;
-                    wantedPosition.Column = playerPosition.Column + 1;
+                    wantedPosition.Row = position.Row;
+                    wantedPosition.Column = position.Column + 1;
                     break;
 
                 case "7":                                                 // NW
-                    wantedPosition.Row = playerPosition.Row - 1;
-                    wantedPosition.Column = playerPosition.Column - 1;
+                    wantedPosition.Row = position.Row - 1;
+                    wantedPosition.Column = position.Column - 1;
                     break;
 
                 case "8":                                                 //  N
-                    wantedPosition.Row = playerPosition.Row - 1;
-                    wantedPosition.Column = playerPosition.Column;
+                    wantedPosition.Row = position.Row - 1;
+                    wantedPosition.Column = position.Column;
                     break;
 
                 case "9":                                                 // NE
-                    wantedPosition.Row = playerPosition.Row - 1;
-                    wantedPosition.Column = playerPosition.Column + 1;
+                    wantedPosition.Row = position.Row - 1;
+                    wantedPosition.Column = position.Column + 1;
                     break;
 
                 default:
                     Console.WriteLine("\nInvalid direction.\n");
-                    wantedPosition.Row = playerPosition.Row;
-                    wantedPosition.Column = playerPosition.Column;
+                    wantedPosition.Row = position.Row;
+                    wantedPosition.Column = position.Column;
                     break;
             }
 
             // Sets Player's Position As The Wanted Position, If It's Valid
             if (CheckInsideBounds(wantedPosition, board))
             {
-                playerPosition.Row = wantedPosition.Row;
-                playerPosition.Column = wantedPosition.Column;
+                position.Row = wantedPosition.Row;
+                position.Column = wantedPosition.Column;
                 hasMoved = true;
             }
             // If It's Not Valid, Display Error Message
@@ -131,57 +148,57 @@ namespace Projeto2aEpoca
             foreach (Cell cell in board.cellList)
             {
                 // Check If It's The Cell Above The Player
-                if (cell.cellRow == playerPosition.Row - 1 &&
-                    cell.cellColumn == playerPosition.Column)
+                if (cell.cellRow == position.Row - 1 &&
+                    cell.cellColumn == position.Column)
                 {
                     cell.hasBeenExplored = true;
                 }
 
                 // Check If It's The Cell Below The Player
-                else if (cell.cellRow == playerPosition.Row + 1 &&
-                         cell.cellColumn == playerPosition.Column)
+                else if (cell.cellRow == position.Row + 1 &&
+                         cell.cellColumn == position.Column)
                 {
                     cell.hasBeenExplored = true;
                 }
 
                 // Check If It's The Cell Left To The Player
-                else if (cell.cellRow == playerPosition.Row &&
-                         cell.cellColumn == playerPosition.Column - 1)
+                else if (cell.cellRow == position.Row &&
+                         cell.cellColumn == position.Column - 1)
                 {
                     cell.hasBeenExplored = true;
                 }
 
                 // Check If It's The Cell Right To The Player
-                else if (cell.cellRow == playerPosition.Row &&
-                         cell.cellColumn == playerPosition.Column + 1)
+                else if (cell.cellRow == position.Row &&
+                         cell.cellColumn == position.Column + 1)
                 {
                     cell.hasBeenExplored = true;
                 }
 
                 // Check If It's The Cell Top Left To The Player
-                if (cell.cellRow == playerPosition.Row - 1 &&
-                    cell.cellColumn == playerPosition.Column - 1)
+                if (cell.cellRow == position.Row - 1 &&
+                    cell.cellColumn == position.Column - 1)
                 {
                     cell.hasBeenExplored = true;
                 }
 
                 // Check If It's The Cell Top Right To The Player
-                else if (cell.cellRow == playerPosition.Row + 1 &&
-                         cell.cellColumn == playerPosition.Column + 1)
+                else if (cell.cellRow == position.Row + 1 &&
+                         cell.cellColumn == position.Column + 1)
                 {
                     cell.hasBeenExplored = true;
                 }
 
                 // Check If It's The Cell Bottom Left To The Player
-                else if (cell.cellRow == playerPosition.Row + 1 &&
-                         cell.cellColumn == playerPosition.Column - 1)
+                else if (cell.cellRow == position.Row + 1 &&
+                         cell.cellColumn == position.Column - 1)
                 {
                     cell.hasBeenExplored = true;
                 }
 
                 // Check If It's The Cell Bottom Right To The Player
-                else if (cell.cellRow == playerPosition.Row - 1 &&
-                         cell.cellColumn == playerPosition.Column + 1)
+                else if (cell.cellRow == position.Row - 1 &&
+                         cell.cellColumn == position.Column + 1)
                 {
                     cell.hasBeenExplored = true;
                 }

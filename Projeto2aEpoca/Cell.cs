@@ -24,7 +24,7 @@ namespace Projeto2aEpoca
 
             hasBeenExplored = false;
         }
-        
+
         /// <summary>
         /// Checks Cell Occupants and Adds Them To 'occupantList' and
         /// fills Remaining (Non-Occupied) Spaces With 'occupantType.empty'
@@ -43,8 +43,8 @@ namespace Projeto2aEpoca
             int occupants = 0;
 
             // Player
-            if (player.playerPosition.Row == cellRow &&
-                player.playerPosition.Column == cellColumn)
+            if (player.position.Row == cellRow &&
+                player.position.Column == cellColumn)
             {
                 occupantList.Add(OccupantTypes.player);
                 occupants++;
@@ -66,6 +66,30 @@ namespace Projeto2aEpoca
                     !trap.fallenInto)
                 {
                     occupantList.Add(OccupantTypes.trap);
+                    occupants++;
+                }
+            }
+
+            // Weapons
+            foreach (Weapon weapon in level.weaponList)
+            {
+                if (weapon.Position.Row == cellRow &&
+                    weapon.Position.Column == cellColumn &&
+                    !weapon.TakenByPlayer)
+                {
+                    occupantList.Add(OccupantTypes.weapon);
+                    occupants++;
+                }
+            }
+
+            // Foods
+            foreach (Food food in level.foodList)
+            {
+                if (food.Position.Row == cellRow &&
+                    food.Position.Column == cellColumn &&
+                    !food.TakenByPlayer)
+                {
+                    occupantList.Add(OccupantTypes.food);
                     occupants++;
                 }
             }

@@ -72,15 +72,19 @@ namespace Projeto2aEpoca
                 name = Console.ReadLine() + "          ";
                 name = name.Substring(0, 10);
 
-                Console.WriteLine($"\nYour score of {Player.score} was added to the {Board.Rows}x{Board.Columns} board HighScores!");
+                Console.WriteLine($"\nYour score of {Player.score} was " +
+                    $"added to the {Board.Rows}x{Board.Columns} board " +
+                    $"HighScores!");
 
                 scoreList.Add(new HighScore(name, Player.score));
                 SortHighScores();
             }
+
             //If 'scoreList' Is Full
             else
             {
-                // Checks If Player's Score Is Better Than Any Score In The List
+                // Checks If Player's Score Is Better Than 
+                // Any Score In The List
                 bool isHigher = false;
                 for (int i = 0; i < scoreList.Count; i++)
                 {
@@ -94,11 +98,14 @@ namespace Projeto2aEpoca
                 if (isHigher)
                 {
                     Console.Clear();
-                    Console.WriteLine("New HighScore! What should we call you?\n");
+                    Console.WriteLine(
+                        "New HighScore! What should we call you?\n");
                     name = Console.ReadLine() + "          ";
                     name = name.Substring(0, 10);
 
-                    Console.WriteLine($"\nYour score of {Player.score} was added to the {Board.Rows}x{Board.Columns} board HighScores!");
+                    Console.WriteLine($"\nYour score of {Player.score} was " +
+                        $"added to the {Board.Rows}x{Board.Columns} " +
+                        $"board HighScores!");
 
                     scoreList.Add(new HighScore(name, Player.score));
 

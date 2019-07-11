@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Projeto2aEpoca
+﻿namespace Projeto2aEpoca
 {
     public class Item
     {
@@ -14,7 +10,6 @@ namespace Projeto2aEpoca
         public Position Position;
 
         public bool isWeapon;
-
         public bool TakenByPlayer;
     }
 }

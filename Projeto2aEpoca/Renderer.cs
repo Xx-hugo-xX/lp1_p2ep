@@ -42,7 +42,9 @@ namespace Projeto2aEpoca
             Console.WriteLine("------------");
             Console.WriteLine($"\nHP: {player.hp.ToString("0.0")}\t" +
                               $"Score: {player.score.ToString("0.0")}\t" +
-                              $"Inventory: {player.getInventoryWeight.ToString("0.0")}% full\n");
+                              $"Inventory: " +
+                              $"{player.getInventoryWeight.ToString("0.0")}" +
+                              $"% full\n");
         }
 
         /// <summary>
@@ -92,9 +94,12 @@ namespace Projeto2aEpoca
             {
                 Console.Write($"Name: {possibleItems.weapons[i].Name}\t\t");
                 if (i == 0 || i == 1 || i == 4) Console.Write("\t");
-                Console.Write($"AttackPower: {possibleItems.weapons[i].AttackPower}\t\t");
-                Console.Write($"Weight: {possibleItems.weapons[i].Weight}\t\t");
-                Console.Write($"Durability: {possibleItems.weapons[i].Durability}\n");
+                Console.Write($"AttackPower:" +
+                    $" {possibleItems.weapons[i].AttackPower}\t\t");
+                Console.Write($"Weight: " +
+                    $"{possibleItems.weapons[i].Weight}\t\t");
+                Console.Write($"Durability: " +
+                    $"{possibleItems.weapons[i].Durability}\n");
             }
 
             Console.WriteLine("\nFood");
@@ -106,7 +111,8 @@ namespace Projeto2aEpoca
             {
                 Console.Write($"Name: {possibleItems.foods[i].Name}\t\t");
                 if (i == 1 || i == 3) Console.Write("\t");
-                Console.Write($"HPIncrease: {possibleItems.foods[i].HPIncrease}\t\t");
+                Console.Write($"HPIncrease: " +
+                    $"{possibleItems.foods[i].HPIncrease}\t\t");
                 Console.Write($"Weight: {possibleItems.foods[i].Weight}\n");
             }
             Console.WriteLine("\n\nPress any key to return");
@@ -389,8 +395,8 @@ namespace Projeto2aEpoca
         {
             Console.WriteLine($"Invalid value for {argument}.\n\n");
 
-            Console.WriteLine("Here's an example of how to use the arguments:" +
-                "\n\tdotnet run -- -r 7 -c 8 -d 5\n" +
+            Console.WriteLine("Here's an example of how to use the " +
+                "arguments:\n\tdotnet run -- -r 7 -c 8 -d 5\n" +
                 "\t-r represents the number of rows in the board" +
                 "\t-c represents the number of columns in the board" +
                 "\t-d represents the difficulty of the game you're playing");
